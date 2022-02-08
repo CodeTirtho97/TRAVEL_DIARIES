@@ -1,25 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Diaries</title>
-    </head>
-
-    <body>
-        <h1>Diaries</h1>
-        <div>
-            <a href="/diaries/new">Add New Diary</a>
-        </div>
-        <ul>
-            <% for(let diary of diaries) { %>
-                <li><a href="/diaries/<%= diary._id %>">
-                        <%= diary.title %>
-                    </a></li>
-                <% } %>
-        </ul>
-    </body>
-
-</html>
+<% layout('layouts/boilerplate')%>
+    <h1>All Diaries</h1>
+    <div class="my-3">
+        <a class="btn btn-primary" href="/diaries/new">Add New Diary</a>
+    </div>
+    <div class="row">
+        <% for(let diary of diaries) { %>
+            <div class="col-md-4">
+                <div class="card mb-3">
+                    <img src="<%= diary.image %>" class="img-img-fluid" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%= diary.title %>
+                        </h5>
+                        <p class="card-text">
+                            <small class="text-muted">
+                                <%= diary.location%>
+                            </small>
+                        </p>
+                        <p class="card-text">
+                            <%= diary.description.slice(0,98) %>...
+                        </p>
+                        <a href="#" class="btn btn-warning">See Diary</a>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+    </div>

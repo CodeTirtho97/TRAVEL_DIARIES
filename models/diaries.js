@@ -3,7 +3,8 @@ const Schema = mongoose.Schema;
 
 const diariesSchema = new Schema({
   title: String,
-  cost: String,
+  image: String,
+  cost: Number,
   description: String,
   location: String,
 });

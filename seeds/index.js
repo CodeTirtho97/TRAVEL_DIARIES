@@ -21,8 +21,13 @@ const seedDB = async () => {
   await Diaries.deleteMany({});
   for (let i = 0; i < 20; i++) {
     const random1000 = Math.floor(Math.random() * 1000);
+    const cost = Math.floor(Math.random() * 90 + 10) * 100;
     const diary = new Diaries({
       title: `${test(descriptors)} ${test(places)}`,
+      image: "https://source.unsplash.com/random/600x400?india",
+      cost,
+      description:
+        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsa quibusdam consectetur ab! Saepe sit optio illo, eum at reiciendis necessitatibus ipsum quis? Magni optio natus doloremque assumenda a eos ab nostrum distinctio, vitae, ullam soluta ut similique harum blanditiis eaque inventore. Fugiat ullam minima eveniet quam sint, nisi sapiente dolorum.",
       location: `${cities[random1000].city}, ${cities[random1000].state}`,
     });
     await diary.save();
