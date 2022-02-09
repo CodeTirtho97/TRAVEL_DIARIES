@@ -1,28 +1,52 @@
 <% layout('layouts/boilerplate')%>
-    <h1>All Diaries</h1>
-    <div class="my-3">
+
+
+    <!-- <div class="my-3">
         <a class="btn btn-primary" href="/diaries/new">Add New Diary</a>
-    </div>
-    <div class="row">
-        <% for(let diary of diaries) { %>
-            <div class="col-md-4">
-                <div class="card mb-3">
-                    <img src="<%= diary.image %>" class="img-img-fluid" alt="">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <%= diary.title %>
-                        </h5>
-                        <p class="card-text">
-                            <small class="text-muted">
-                                <%= diary.location%>
-                            </small>
-                        </p>
-                        <p class="card-text">
-                            <%= diary.description.slice(0,98) %>...
-                        </p>
-                        <a href="#" class="btn btn-warning">See Diary</a>
+    </div> -->
+    <img class="mb-5"
+        src="https://images.unsplash.com/photo-1621847468516-1ed5d0df56fe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
+        alt=""
+        style="background-size: cover; background-repeat: no-repeat; width: 100%; max-height: 650px; filter: blur(5px);">
+    <h1 class="display-2 text-center"
+        style="position: absolute; top: 30%; left: 50%; transform: translate(-50%,-50%); font-weight: 700; color: #fff;">
+        Confused
+        about where to go on
+        holidays next?</h1>
+    <p class="display-6 text-center"
+        style="position: absolute; top: 60%; left: 50%; padding: 8px; transform: translate(-50%,-50%); font-weight: 700; color: #ff6d00; background-color: rgba(0,0,0,0.4); border: 3px solid #fff; border-radius: 15px;">
+        Choose wisely from our vast amount of travel diaries!</p>
+    <div class="container">
+        <div class="row">
+            <p class="text-center display-4 mb-5 py-2"
+                style="background-color: #f4a261; border-radius: 10px; display: inline-block; font-weight: 700;">
+                Explore Diaries
+            </p>
+            <% for(let diary of diaries) { %>
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <img src="<%= diary.image %>" class="img-img-fluid" alt="">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <%= diary.title %>
+                            </h5>
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    <%= diary.location%>
+                                </small>
+                            </p>
+                            <p class="card-text">
+                                <%= diary.description.slice(0,98) %>...
+                            </p>
+                            <div>
+                                <p class="text-muted float-start">
+                                    <%= diary.updated.toString().slice(4,11) %>
+                                </p>
+                                <a href="/diaries/<%= diary._id %>" class="btn btn-warning float-end">See Diary</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <% } %>
+                <% } %>
+        </div>
     </div>

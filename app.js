@@ -3,6 +3,7 @@ const path = require("path");
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
+const moment = require("moment");
 const Diary = require("./models/diaries");
 
 mongoose.connect("mongodb://localhost:27017/travel-diaries", {
@@ -46,7 +47,8 @@ app.post("/diaries", async (req, res) => {
 
 app.get("/diaries/:id", async (req, res) => {
   const diary = await Diary.findById(req.params.id);
-  res.render("diaries/show", { diary });
+  const date = moment(diary.updated).fromNow();
+  res.render("diaries/show", { diary, date });
 });
 
 app.get("/diaries/:id/edit", async (req, res) => {
