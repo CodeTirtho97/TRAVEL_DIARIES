@@ -1,32 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Show Diary</title>
-    </head>
-
-    <body>
-        <h1>
-            <%= diary.title %>
-        </h1>
-        <h2>
-            <%= diary.location %>
-        </h2>
-        <p><a href="/diaries/<%= diary._id %>/edit">Edit Diary</a></p>
-        <p>
-        <form action="/diaries/<%= diary._id %>?_method=DELETE" method="POST">
-            <button>Delete Diary</button>
-        </form>
-        </p>
-        <footer>
-            <p>
-                <%= date %>
-            </p>
-            <a href="/diaries">All Diaries</a>
-        </footer>
-    </body>
-
-</html>
+<% layout('layouts/boilerplate')%>
+    <div class="container">
+        <div class="col-md-10 offset-1">
+            <div class="card my-5">
+                <img src="<%= diary.image %>" class="card-img-top img img-fluid" alt="<%= diary.title %>"
+                    style='height: 630px; width: 100%; object-fit: fill; background-color: #212529;' />
+                <div class="card-body">
+                    <h5 class="display-5 card-title text-center" style="letter-spacing: 1.5px;">
+                        <%= diary.title %>
+                    </h5>
+                    <p class="h4 card-text text-muted pb-3 text-center"
+                        style="border-bottom: 1px solid rgba(0,0,0,0.2);">
+                        <%= diary.location %>
+                    </p>
+                    <p class="h4 card-text py-3">Costs Around &#8377;<%= diary.cost %>
+                    </p>
+                    <p class="card-text pb-3" style="font-size: 18px;">
+                        <%= diary.description %>
+                    </p>
+                    <p class="card-text pb-3"
+                        style="font-size: 16px; font-weight: 500; border-bottom: 1px solid rgba(0,0,0,0.2);">
+                        Posted by: John Doe
+                    </p>
+                    <div>
+                        <a class="col-md-4 float-start btn btn-warning btn-lg"
+                            href="/diaries/<%= diary._id %>/edit">&#128221; Edit
+                            Diary</a>
+                        <p>
+                        <form action="/diaries/<%= diary._id %>?_method=DELETE" method="POST">
+                            <button class="col-md-4 float-end btn btn-danger btn-lg">Delete Diary &#9760;</button>
+                        </form>
+                        </p>
+                    </div>
+                </div>
+                <div class="card-footer"><small class="text-muted">Last Updated: <%= date %>
+                    </small></div>
+            </div>
+        </div>
+    </div>
