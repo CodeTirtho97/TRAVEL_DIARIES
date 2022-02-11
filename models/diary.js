@@ -19,4 +19,4 @@ diariesSchema.pre("save", function (next) {
   next();
 });
 
-module.exports = mongoose.model("Diaries", diariesSchema);
+module.exports = mongoose.model("Diary", diariesSchema);
