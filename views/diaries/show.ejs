@@ -6,6 +6,8 @@
                     <img src="<%= diary.image %>" class="card-img-top img img-fluid" alt="<%= diary.title %>"
                         style='height: 630px; width: 100%; object-fit: contain; background-color: #212529;' />
                     <div class="card-body">
+                        <!-- <a class="likeicon float-start" onclink="updateLikes()"><i
+                                class="fa-regular fa-heart fa-2x"></i></a> -->
                         <h5 class="display-5 card-title text-center" style="letter-spacing: 1.5px;">
                             <%= diary.title %>
                         </h5>
@@ -14,6 +16,8 @@
                             <%= diary.location %>
                         </p>
                         <p class="h4 card-text py-3">Costs Around &#8377;<%= diary.cost %>
+                                <!-- <a class="likeicon float-end" onclink="updateLikes()"><i
+                                        class="fa-regular fa-heart fa-2x"></i></a> -->
                         </p>
                         <p class="card-text pb-3" style="font-size: 18px;">
                             <%= diary.description %>
@@ -39,11 +43,92 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-5 offset-1">
-                <h1>Reviews</h1>
+            <div class="col-md-4 offset-1">
+                <% if(diary.reviews.length) { %>
+                    <h3 class="mb-2">See What Others Say...</h3>
+                    <% for(let review of diary.reviews) { %>
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Rating: <%= review.rating %>
+                                </h5>
+                                <p class="card-text">
+                                    <%= review.comment %>
+                                </p>
+                                <form action="/diaries/<%= diary._id %>/reviews/<%= review._id %>?_method=DELETE"
+                                    method="POST">
+                                    <button class="btn btn-sm btn-danger">Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                        <% } %>
+                            <% } else { %>
+                                <h4 class="mb-2">Be the first to leave a comment...</h4>
+                                <% } %>
+                                    <% if(diary.reviews.length>= 0 && diary.reviews.length < 5) { %>
+                                            <% if(diary.reviews.length) {%>
+                                                <h4>Leave a Comment</h4>
+                                                <% } %>
+                                                    <form action="/diaries/<%= diary._id %>/reviews" method="POST"
+                                                        class="mb-3 validated-form" novalidate>
+                                                        <div class="mb-3">
+                                                            <label class="form-label mt-3" for="rating">Rating</label>
+                                                            <input class="form-range" type="range" min="1" max="5"
+                                                                name="review[rating]" id="rating">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label" for="body">Comment</label>
+                                                            <textarea class="form-control" name="review[comment]"
+                                                                id="body" cols="30" rows="3" required></textarea>
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                            </div>
+                                                            <div class="invalid-feedback">
+                                                                Write Something!
+                                                            </div>
+                                                        </div>
+                                                        <button class="btn btn-lg float-end btn-success">Submit</button>
+                                                    </form>
+                                                    <% } %>
             </div>
-            <div class="col-md-5 offset-1">
-                <h1>Map</h1>
+            <div class="col-md-4 offset-2">
+                <div class="row">
+                    <h1>Map</h1>
+                </div>
+                <div class="row">
+                    <% if(diary.reviews.length>= 5 ) { %>
+                        <h4>Leave a Comment</h4>
+                        <form action="/diaries/<%= diary._id %>/reviews" method="POST" class="mb-3 validated-form"
+                            novalidate>
+                            <div class="mb-3">
+                                <label class="form-label mt-3" for="rating">Rating</label>
+                                <input class="form-range" type="range" min="1" max="5" name="review[rating]"
+                                    id="rating">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="body">Comment</label>
+                                <textarea class="form-control" name="review[comment]" id="body" cols="30" rows="3"
+                                    required></textarea>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Write Something!
+                                </div>
+                            </div>
+                            <button class="btn btn-lg float-end btn-success">Submit</button>
+                        </form>
+                        <% } %>
+                </div>
             </div>
         </div>
     </div>
+
+    <script>
+        function updateLikes () {
+            id = $( '.likeicon' );
+            $.post( '/index/' + id, function ( response ) {
+                $( 'fa-thumbs-o-up' ).text( response.likeCount ); //your counter on a page
+                //and update likes counter with response
+            } );
+        }
+    </script>

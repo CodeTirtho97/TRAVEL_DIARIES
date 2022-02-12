@@ -4,10 +4,11 @@ const mongoose = require("mongoose");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const moment = require("moment");
-const { diarySchema } = require("./JoiSchema");
+const { diarySchema, reviewSchema } = require("./JoiSchema");
 const catchAsync = require("./utils/catchAsync");
 const ExpressError = require("./utils/ExpressError");
 const Diary = require("./models/diary");
+const Review = require("./models/review");
 
 mongoose.connect("mongodb://localhost:27017/travel-diaries", {
   useNewUrlParser: true,
@@ -31,6 +32,16 @@ app.use(methodOverride("_method"));
 
 const validateDiary = (req, res, next) => {
   const { error } = diarySchema.validate(req.body);
+  if (error) {
+    const msg = error.details.map((el) => el.message).join(",");
+    throw new ExpressError(msg, 400);
+  } else {
+    next();
+  }
+};
+
+const validateReview = (req, res, next) => {
+  const { error } = reviewSchema.validate(req.body);
   if (error) {
     const msg = error.details.map((el) => el.message).join(",");
     throw new ExpressError(msg, 400);
@@ -68,7 +79,7 @@ app.post(
 app.get(
   "/diaries/:id",
   catchAsync(async (req, res) => {
-    const diary = await Diary.findById(req.params.id);
+    const diary = await Diary.findById(req.params.id).populate("reviews");
     const date = moment(diary.updated).fromNow();
     res.render("diaries/show", { diary, date });
   })
@@ -100,6 +111,30 @@ app.delete(
     const { id } = req.params;
     await Diary.findByIdAndDelete(id);
     res.redirect("/diaries");
+  })
+);
+
+app.post(
+  "/diaries/:id/reviews",
+  validateReview,
+  catchAsync(async (req, res) => {
+    const diary = await Diary.findById(req.params.id);
+    const review = new Review(req.body.review);
+    console.log(review);
+    diary.reviews.push(review);
+    await review.save();
+    await diary.save();
+    res.redirect(`/diaries/${diary._id}`);
+  })
+);
+
+app.delete(
+  "/diaries/:id/reviews/:reviewId",
+  catchAsync(async (req, res) => {
+    const { id, reviewId } = req.params;
+    await Diary.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
+    await Review.findByIdAndDelete(reviewId);
+    res.redirect(`/diaries/${id}`);
   })
 );
 
