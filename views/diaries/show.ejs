@@ -15,6 +15,13 @@
                             style="border-bottom: 1px solid rgba(0,0,0,0.2);">
                             <%= diary.location %>
                         </p>
+                        <form action="/diaries/<%= diary._id %>/likes" method="POST">
+                            <p class="float-end mt-2"><button id="like" class="btn btn-info btn-lg"
+                                    name="like[count]">Like &#128077;</button></p>
+                        </form>
+                        <p>
+                            <%= diary.likes.length %> likes
+                        </p>
                         <p class="h4 card-text py-3">Costs Around &#8377;<%= diary.cost %>
                                 <!-- <a class="likeicon float-end" onclink="updateLikes()"><i
                                         class="fa-regular fa-heart fa-2x"></i></a> -->
@@ -37,8 +44,10 @@
                             </p>
                         </div>
                     </div>
-                    <div class="card-footer"><small class="text-muted">Last Updated: <%= date %>
-                        </small></div>
+                    <div class="card-footer">
+                        <small class="text-muted">Created: <%= createdDate %></small>
+                        <small class="text-muted float-end">Last Changed: <%= upDatedDate %></small>
+                    </div>
                 </div>
             </div>
         </div>
@@ -123,12 +132,11 @@
         </div>
     </div>
 
+
     <script>
-        function updateLikes () {
-            id = $( '.likeicon' );
-            $.post( '/index/' + id, function ( response ) {
-                $( 'fa-thumbs-o-up' ).text( response.likeCount ); //your counter on a page
-                //and update likes counter with response
-            } );
-        }
+        const like = document.getElementById( 'like' );
+        like.addEventListener( 'click', () => {
+            like.innerHTML += 'disabled';
+            like.innerText = 'Liked';
+        } )
     </script>

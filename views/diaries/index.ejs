@@ -20,34 +20,80 @@
         <div class="row">
             <p class="text-center display-4 mb-5 py-2"
                 style="background-color: #f4a261; border-radius: 10px; display: inline-block; font-weight: 700;">
-                Explore Diaries
+                Recently Added...
             </p>
-            <% for(let diary of diaries) { %>
-                <div class="col-md-4">
-                    <div class="card mb-3">
-                        <img src="<%= diary.image %>" class="img img-fluid" alt="<%=diary.title %>"
-                            style="height: 400px; width: 600px;">
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                <%= diary.title %>
-                            </h5>
-                            <p class="card-text">
-                                <small class="text-muted">
-                                    <%= diary.location%>
-                                </small>
-                            </p>
-                            <p class="card-text">
-                                <%= diary.description.slice(0,98)%>...
-                            </p>
-                            <div>
-                                <p class="text-muted float-start">
-                                    <%= diary.updated.toString().slice(4,11) %>
+            <% let count=1 %>
+                <% for(let recentDiary of recentDiaries) { %>
+                    <div class="col-md-4">
+                        <div class="card mb-3">
+                            <img src="<%= recentDiary.image %>" class="img img-fluid" alt="<%=recentDiary.title %>"
+                                style="height: 400px; width: 600px;">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <%= recentDiary.title %>
+                                </h5>
+                                <p class="card-text">
+                                    <small class="text-muted">
+                                        <%= recentDiary.location%>
+                                    </small>
                                 </p>
-                                <a href="/diaries/<%= diary._id %>" class="btn btn-warning float-end">See Diary</a>
+                                <p class="card-text">
+                                    <%= recentDiary.description.slice(0,98)%>...
+                                </p>
+                                <div>
+                                    <p class="text-muted float-start">
+                                        <%= recentDiary.created.toString().slice(4,11) %>
+                                    </p>
+                                    <a href="/diaries/<%= recentDiary._id %>" class="btn btn-warning float-end">See
+                                        Diary</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <% } %>
+                    <% count++ %>
+                        <% if(count> 3) break %>
+                            <% } %>
+                                <a href="/diaries/recent" class="d-grid btn btn-outline-primary">See More</a>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="row">
+            <p class="text-center display-4 mb-5 py-2"
+                style="background-color: #f4a261; border-radius: 10px; display: inline-block; font-weight: 700;">
+                Most Liked...
+            </p>
+            <% count=1 %>
+                <% for(let mostLikedDiary of mostLikedDiaries) { %>
+                    <div class="col-md-4">
+                        <div class="card mb-3">
+                            <img src="<%= mostLikedDiary.image %>" class="img img-fluid"
+                                alt="<%=mostLikedDiary.title %>" style="height: 400px; width: 600px;">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <%= mostLikedDiary.title %>
+                                </h5>
+                                <p class="card-text">
+                                    <small class="text-muted">
+                                        <%= mostLikedDiary.location%>
+                                    </small>
+                                </p>
+                                <p class="card-text">
+                                    <%= mostLikedDiary.description.slice(0,98)%>...
+                                </p>
+                                <div>
+                                    <p class="text-muted float-start">
+                                        <%= mostLikedDiary.likes.length%> likes
+                                    </p>
+                                    <a href="/diaries/<%= mostLikedDiary._id %>" class="btn btn-warning float-end">See
+                                        Diary</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% count++ %>
+                        <% if(count> 3) break %>
+                            <% } %>
+                                <a href="/diaries/mostliked" class="d-grid btn btn-outline-primary">See More</a>
         </div>
     </div>

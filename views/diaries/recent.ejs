@@ -1,0 +1,35 @@
+<% layout('layouts/boilerplate')%>
+
+    <div class="container my-5">
+        <h4 class="text-center display-4 mb-5 py-2"
+            style="background-color: #f4a261; border-radius: 10px; display: inline-block; font-weight: 700;">
+            Recently Added...
+        </h4>
+        <% for(let recentDiary of recentDiaries) {%>
+            <div class="card mb-3">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img class="img-fluid" alt="<%= recentDiary.title %> " src="<%=recentDiary.image%>">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <%= recentDiary.title %>
+                            </h5>
+                            <p class="card-text">
+                                <%= recentDiary.description %>
+                            </p>
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    <%= recentDiary.location%>
+                                </small>
+                            </p>
+                            <a class="btn btn-primary" href="/diaries/<%=recentDiary._id%>">View
+                                <%=recentDiary.title%>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% }%>
+    </div>

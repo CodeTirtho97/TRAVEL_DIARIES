@@ -8,10 +8,20 @@ const diariesSchema = new Schema({
   cost: Number,
   description: String,
   location: String,
+  created: {
+    type: Date,
+    default: Date.now,
+  },
   updated: {
     type: Date,
     default: Date.now,
   },
+  likes: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Like",
+    },
+  ],
   reviews: [
     {
       type: Schema.Types.ObjectId,
@@ -23,6 +33,9 @@ const diariesSchema = new Schema({
 diariesSchema.pre("save", function (next) {
   const now = this;
   now.updated = Date.now();
+  if (!this.created) {
+    this.created = now;
+  }
   next();
 });
 
