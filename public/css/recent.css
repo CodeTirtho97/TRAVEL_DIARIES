@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=Rokkitt:wght@500&display=swap");
+
+h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  font-family: "Rokkitt", serif;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 0.5px;
+  margin: 4rem;
+  white-space: nowrap;
+  background-color: #eae2cc;
+  border: 2px solid #222;
+  padding: 5px 11px 3px 11px;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+h1:before,
+.thirteen h1:after {
+  background-color: #c50000;
+  position: absolute;
+  content: "";
+  height: 7px;
+
+  width: 7px;
+  border-radius: 50%;
+  bottom: 12px;
+}
+h1:before {
+  left: -20px;
+}
+h1:after {
+  right: -20px;
+}
+
+.card {
+  transition: all 0.3s ease-in-out;
+}
+
+.card a {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-40px);
+  transition: 0.5s;
+}
+
+.card:hover a {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.card img {
+  height: 350px;
+  width: 500px;
+}
+
+.card:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  border: 1px solid #222;
+}

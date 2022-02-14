@@ -69,7 +69,6 @@ app.get(
     res.render("diaries/index", {
       recentDiaries,
       mostLikedDiaries,
-      page_name: "home",
     });
   })
 );
@@ -79,7 +78,7 @@ app.get(
   catchAsync(async (req, res) => {
     const recentDiaries = await Diary.find();
     recentDiaries.sort((a, b) => b.created - a.created);
-    res.render("diaries/recent", { recentDiaries, page_name: "recent" });
+    res.render("diaries/recent", { recentDiaries });
   })
 );
 
@@ -90,13 +89,12 @@ app.get(
     mostLikedDiaries.sort((a, b) => b.likes.length - a.likes.length);
     res.render("diaries/mostliked", {
       mostLikedDiaries,
-      page_name: "mostliked",
     });
   })
 );
 
 app.get("/diaries/new", (req, res) => {
-  res.render("diaries/new", { page_name: "new" });
+  res.render("diaries/new");
 });
 
 app.post(
@@ -122,7 +120,6 @@ app.get(
       diary,
       createdDate,
       upDatedDate,
-      page_name: "diary",
     });
   })
 );

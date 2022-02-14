@@ -1,16 +1,24 @@
 <% layout('layouts/boilerplate')%>
     <link rel="stylesheet" href="/css/index.css">
+    <div class="cover mb-5">
+        <p id="firstLine">Welcome to <b>Travel</b> <span>diaries</span></p>
+        <p id="secondLine" class="mb-5">Your <span>Unofficial</span> Travel Guide!</p>
+        <div class="subhead">
+            <p class="mt-5">Feeling stressed about your next trip?</p>
+            <p>No Worries! Go through our numerous <span>diaries</span> and travel with a free
+                mind &#128519;.</p>
+        </div>
+    </div>
     <div class="main container-fluid my-5">
         <div class="row">
             <span class="heading">
-                <a class="display-3" href="/diaries/recent">Recently Added...</a>
+                <a href="/diaries/recent">Recently Added...</a>
             </span>
             <% let count=1 %>
                 <% for(let recentDiary of recentDiaries) { %>
                     <div class="col-3">
                         <div class="card mb-3">
-                            <img src="<%= recentDiary.image %>" class="img img-fluid" alt="<%=recentDiary.title %>"
-                                style="height: 400px; width: 600px;">
+                            <img src="<%= recentDiary.image %>" class="img img-fluid" alt="<%=recentDiary.title %>">
                             <div class="card-body">
                                 <h5 class="card-title">
                                     <%= recentDiary.title %>
@@ -21,15 +29,14 @@
                                     </small>
                                 </p>
                                 <p class="card-text">
-                                    <%= recentDiary.description.slice(0,98)%>...
+                                    <%= recentDiary.description.slice(0,50)%>...
                                 </p>
                                 <div>
                                     <p class="text-muted float-start">
                                         <%= recentDiary.created.toString().slice(4,11) %>
                                     </p>
-                                    <a href="/diaries/<%= recentDiary._id %>"
-                                        class="btn btn-outline-primary float-end">See
-                                        Diary</a>
+                                    <a href="/diaries/<%= recentDiary._id %>" class="btn btn-primary float-end">See
+                                        Diary ></a>
                                 </div>
                             </div>
                         </div>
@@ -37,21 +44,24 @@
                     <% count++ %>
                         <% if(count> 3) break %>
                             <% } %>
-                                <div class="more col d-flex justify-content-center align-items-center">
-                                    <a class="btn btn-lg btn-outline-danger" href="/diaries/recent">See More</a>
-                                </div>
-                                <hr>
+                                <% if(recentDiaries.length> 3) { %>
+                                    <div class="more col d-flex justify-content-center align-items-center">
+                                        <a class="btn btn-lg btn-outline-danger" href="/diaries/recent">See More
+                                            &#9112;</a>
+                                    </div>
+                                    <% } %>
+                                        <hr>
         </div>
         <div class="row">
             <span class="heading">
-                <a class="display-3" href="/diaries/mostliked">Most Liked...</a>
+                <a href="/diaries/mostliked">Most Liked...</a>
             </span>
             <% count=1 %>
                 <% for(let mostLikedDiary of mostLikedDiaries) { %>
                     <div class="col-md-3">
                         <div class="card mb-3">
                             <img src="<%= mostLikedDiary.image %>" class="img img-fluid"
-                                alt="<%=mostLikedDiary.title %>" style="height: 400px; width: 600px;">
+                                alt="<%=mostLikedDiary.title %>">
                             <div class="card-body">
                                 <h5 class="card-title">
                                     <%= mostLikedDiary.title %>
@@ -62,15 +72,14 @@
                                     </small>
                                 </p>
                                 <p class="card-text">
-                                    <%= mostLikedDiary.description.slice(0,98)%>...
+                                    <%= mostLikedDiary.description.slice(0,50)%>...
                                 </p>
                                 <div>
                                     <p class="text-muted float-start">
                                         <%= mostLikedDiary.likes.length%> likes
                                     </p>
-                                    <a href="/diaries/<%= mostLikedDiary._id %>"
-                                        class="btn btn-outline-primary float-end">See
-                                        Diary</a>
+                                    <a href="/diaries/<%= mostLikedDiary._id %>" class="btn btn-primary float-end">See
+                                        Diary ></a>
                                 </div>
                             </div>
                         </div>
@@ -78,8 +87,11 @@
                     <% count++ %>
                         <% if(count> 3) break %>
                             <% } %>
-                                <div class="more col d-flex justify-content-center align-items-center">
-                                    <a class="btn btn-lg btn-outline-danger" href="/diaries/mostliked">See More</a>
-                                </div>
+                                <% if(recentDiaries.length> 3) { %>
+                                    <div class="more col d-flex justify-content-center align-items-center">
+                                        <a class="btn btn-lg btn-outline-danger" href="/diaries/mostliked">See More
+                                            &#9112;</a>
+                                    </div>
+                                    <% } %>
         </div>
     </div>

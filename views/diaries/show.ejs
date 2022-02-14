@@ -2,7 +2,7 @@
     <div class="container-fluid my-4">
         <div class="row">
             <div class="col-md-10 offset-1">
-                <div class="card my-5">
+                <div class="card mt-5">
                     <img src="<%= diary.image %>" class="card-img-top img img-fluid" alt="<%= diary.title %>"
                         style='height: 630px; width: 100%; object-fit: contain; background-color: #212529;' />
                     <div class="card-body">
@@ -51,6 +51,12 @@
                 </div>
             </div>
         </div>
+        <p class="row justify-content-center mt-3 mb-5">
+            <a class="col-md-9 btn btn-info btn lg" href="/diaries"
+                style="font-size: 25px; font-weight: 700; border: 1px solid #000;">&#128072;
+                Back to
+                Home</a>
+        </p>
         <div class="row">
             <div class="col-md-4 offset-1">
                 <% if(diary.reviews.length) { %>

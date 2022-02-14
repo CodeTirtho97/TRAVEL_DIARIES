@@ -1,12 +1,12 @@
 <% layout('layouts/boilerplate')%>
+    <link rel="stylesheet" href="/css/recent.css">
 
     <div class="container my-5">
-        <h4 class="text-center display-4 mb-5 py-2"
-            style="background-color: #f4a261; border-radius: 10px; display: inline-block; font-weight: 700;">
-            Recently Added...
-        </h4>
+        <h1>
+            &lt; Recently Added Diaries &gt;
+        </h1>
         <% for(let recentDiary of recentDiaries) {%>
-            <div class="card mb-3">
+            <div class="card mb-4">
                 <div class="row">
                     <div class="col-md-4">
                         <img class="img-fluid" alt="<%= recentDiary.title %> " src="<%=recentDiary.image%>">

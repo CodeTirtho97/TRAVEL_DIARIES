@@ -1,3 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Proza+Libre&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Eczar&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@700&display=swap");
+
 .main {
   margin-left: 5rem;
   width: auto;
@@ -10,15 +15,144 @@
   margin: 35px 0;
 }
 
+.cover {
+  margin: 0;
+  padding: 10rem 8rem;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("https://images.unsplash.com/photo-1452421822248-d4c2b47f0c81?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80");
+  background-size: cover;
+  color: #f8f8f8;
+  text-align: center;
+}
+
+.cover span {
+  font-style: italic;
+  font-weight: lighter;
+}
+
+.cover p#firstLine {
+  font-size: 6rem;
+}
+
+.cover p#secondLine {
+  font-size: 2.5rem;
+}
+
+.cover h1 b {
+  font-weight: 700;
+}
+
+.cover .subhead {
+  margin-top: 12rem;
+  font-size: 2rem;
+  font-family: "Bodoni Moda", serif;
+  color: #e3caab;
+}
+
 .main .heading {
   margin-bottom: 2rem;
 }
 
 .main .heading a {
   text-decoration: none;
+  font-weight: 500;
+  font-family: "Proza Libre", sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  width: 160px;
+  text-align: center;
+  margin: auto;
+  white-space: nowrap;
+  padding-bottom: 13px;
+}
+.main .heading a:before {
+  background-color: #c50000;
+  content: "";
+  display: block;
+  height: 3px;
+  width: 75px;
+  margin-bottom: 5px;
+}
+.main .heading a:after {
+  background-color: #c50000;
+  content: "";
+  display: block;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  margin-bottom: 0.25em;
 }
 
 .main .more a {
   padding: 20px 40px;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
+  font-family: "Eczar", serif;
+  box-shadow: 0 2px 7px rgba(74, 73, 73, 0.46),
+    0 3px 6px rgba(108, 108, 108, 0.32);
+}
+
+.main .more a:hover {
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+
+.card {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.card img {
+  filter: grayscale();
+  height: 400px;
+  width: 600px;
+}
+
+.card:hover img {
+  filter: none;
+}
+
+.card:hover h5 {
+  color: #e63946;
+}
+
+.card:hover a {
+  transform: scale(1.1);
+}
+
+.card h5 {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 500;
+  font-family: "Bree Serif", serif;
+  color: #222;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+
+  display: grid;
+  grid-template-columns: 1fr max-content 1fr;
+  grid-template-rows: 27px 0;
+  grid-gap: 20px;
+  align-items: center;
+}
+
+.card h5:after,
+.card h5:before {
+  content: " ";
+  display: block;
+  border-bottom: 1px solid #e63946;
+  border-top: 1px solid #e63946;
+  height: 5px;
+  background-color: #f8f8f8;
+}
+
+.card-body {
+  background-color: #fff6cc;
+}
+
+.card:hover .card-body {
+  background-color: #f8f8f8;
 }
