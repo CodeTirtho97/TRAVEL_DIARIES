@@ -118,7 +118,12 @@ app.get(
       .populate("likes");
     const createdDate = moment(diary.created).calendar();
     const upDatedDate = moment(diary.updated).fromNow();
-    res.render("diaries/show", { diary, createdDate, upDatedDate });
+    res.render("diaries/show", {
+      diary,
+      createdDate,
+      upDatedDate,
+      page_name: "diary",
+    });
   })
 );
 
