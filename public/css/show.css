@@ -1,0 +1,94 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap");
+
+#diary {
+  box-shadow: 0 0 5px #333;
+}
+
+#diary img {
+  height: 630px;
+  max-width: 100%;
+  object-fit: contain;
+  background-color: #212529;
+}
+
+#diary h5 {
+  text-align: center;
+  font-size: 50px;
+  text-transform: uppercase;
+  color: #222;
+  letter-spacing: 1.5px;
+  font-family: "Playfair Display", serif;
+  font-weight: 400;
+}
+#diary p:first-of-type {
+  margin-top: 3px;
+  font-size: 20px;
+  color: #444;
+  word-spacing: 1px;
+  font-weight: normal;
+  text-transform: uppercase;
+  font-family: "Raleway", sans-serif;
+  font-weight: 500;
+}
+
+#diary hr {
+  border-bottom: 2px solid #1f1209;
+  box-shadow: 0 40px 40px -20px #333;
+}
+
+#diary p.h4 {
+  font-family: "Dancing Script", cursive;
+  font-size: 30px;
+  color: #be0aff;
+}
+
+#diary p#desc {
+  font-size: 20px;
+  font-family: "Ubuntu Mono", monospace;
+}
+
+#diary p#user {
+  color: #03045e;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+#like {
+  box-shadow: 0 2px 7px rgba(74, 73, 73, 0.46),
+    0 3px 6px rgba(108, 108, 108, 0.32);
+}
+
+#like:active {
+  transform: scale(0.98);
+}
+
+#backHome a {
+  padding: 4px 8px;
+  font-size: 1.8rem;
+  font-family: "Eczar", serif;
+  box-shadow: 0 2px 7px rgba(74, 73, 73, 0.46),
+    0 3px 6px rgba(108, 108, 108, 0.32);
+}
+
+#backHome a:hover {
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+
+#reviews {
+  padding-right: 30px;
+  /* border-right: 0.1px solid #222; */
+}
+
+#map {
+  padding-left: 30px;
+}
+
+#review {
+  border: 1px solid #e09f3e;
+  background: linear-gradient(
+    100deg,
+    rgba(250, 214, 195, 0.8) 30%,
+    #b0eae8 120%
+  );
+}

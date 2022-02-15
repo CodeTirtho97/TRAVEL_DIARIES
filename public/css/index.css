@@ -26,6 +26,7 @@
   background-size: cover;
   color: #f8f8f8;
   text-align: center;
+  box-shadow: 0 10px 6px -6px #777;
 }
 
 .cover span {

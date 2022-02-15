@@ -1,0 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Bangers&display=swap");
+
+.card {
+  box-shadow: 0 2px 7px rgba(74, 73, 73, 0.46),
+    0 3px 6px rgba(108, 108, 108, 0.32);
+}
+
+.container h1 {
+  font-family: "Courier New", Courier, monospace;
+  font-family: "Bangers", cursive;
+  letter-spacing: 5px;
+  color: #c13936;
+}
+
+.card a {
+  color: #fff;
+}
