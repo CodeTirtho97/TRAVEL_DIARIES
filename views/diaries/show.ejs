@@ -11,12 +11,12 @@
                         <h5 class="display-5 card-title text-center">
                             <%= diary.title %>
                         </h5>
-                        <p class="h5 card-text text-muted pb-3 text-center">
+                        <p class="h5 card-text text-muted pb-2 text-center">
                             <%=diary.location %>
                         </p>
                         <hr>
                         <form action="/diaries/<%= diary._id %>/likes" method="POST">
-                            <p class="float-end mt-2">
+                            <p class="float-right mt-1">
                                 <button id="like" class="btn btn-outline-success btn-lg" name="like[count]">Like
                                     &#128077;</button>
                             </p>
@@ -36,37 +36,38 @@
                         </p>
                         <hr>
                         <div>
-                            <a class="col-md-4 float-start btn btn-warning btn-lg"
+                            <a class="col-md-4 float-left btn btn-warning p-1 mx-1"
                                 href="/diaries/<%= diary._id %>/edit">&#128221; Edit
                                 Diary</a>
                             <p>
                             <form action="/diaries/<%= diary._id %>?_method=DELETE" method="POST">
-                                <button class="col-md-4 float-end btn btn-danger btn-lg">Delete Diary &#9760;</button>
+                                <button class="col-md-4 float-right btn btn-danger p-1 mx-1">Delete Diary
+                                    &#9760;</button>
                             </form>
                             </p>
                         </div>
                     </div>
                     <div class="card-footer">
                         <small class="text-muted">Created: <%= createdDate %></small>
-                        <small class="text-muted float-end">Last Changed: <%= upDatedDate %></small>
+                        <small class="text-muted float-right">Last Changed: <%= upDatedDate %></small>
                     </div>
                 </div>
             </div>
         </div>
         <p id="backHome" class="row justify-content-center mt-3 mb-5">
-            <a class="col-md-9 btn btn-info btn lg" href="/diaries">&#128072;
+            <a class="col-md-9 btn btn-info" href="/diaries">&#128072;
                 Back to
                 Home</a>
         </p>
         <div class="row">
             <div id="reviews" class="col-md-5 offset-1">
                 <% if(diary.reviews.length) { %>
-                    <h3 class="mb-2">See What Others Say...</h3>
+                    <h4 class="mb-2">See What Others Say...</h4>
                     <% for(let review of diary.reviews) { %>
                         <div id="review" class="card mb-3">
                             <div class="card-body">
-                                <h5 class="card-title">Rating: <%= review.rating %>
-                                </h5>
+                                <h6 class="card-title">Rating: <%= review.rating %>
+                                </h6>
                                 <p class="card-text">
                                     <%= review.comment %>
                                 </p>
@@ -82,7 +83,7 @@
                                 <% } %>
                                     <% if(diary.reviews.length>= 0 && diary.reviews.length < 5) { %>
                                             <% if(diary.reviews.length) {%>
-                                                <h4>Leave a Comment</h4>
+                                                <h5>Leave a Comment</h5>
                                                 <% } %>
                                                     <form action="/diaries/<%= diary._id %>/reviews" method="POST"
                                                         class="mb-3 validated-form" novalidate>
@@ -102,7 +103,7 @@
                                                                 Write Something!
                                                             </div>
                                                         </div>
-                                                        <button class="btn btn-lg float-end btn-success">Submit</button>
+                                                        <button class="btn float-right btn-success">Submit</button>
                                                     </form>
                                                     <% } %>
             </div>
@@ -131,7 +132,7 @@
                                     Write Something!
                                 </div>
                             </div>
-                            <button class="btn btn-lg float-end btn-success">Submit</button>
+                            <button class="btn btn-lg float-right btn-success">Submit</button>
                         </form>
                         <% } %>
                 </div>

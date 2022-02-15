@@ -3,18 +3,19 @@
 
 #diary {
   box-shadow: 0 0 5px #333;
+  max-width: 100vw;
 }
 
 #diary img {
-  height: 630px;
-  max-width: 100%;
+  height: 500px;
+  width: 100vw;
   object-fit: contain;
   background-color: #212529;
 }
 
 #diary h5 {
   text-align: center;
-  font-size: 50px;
+  font-size: 30px;
   text-transform: uppercase;
   color: #222;
   letter-spacing: 1.5px;
@@ -23,7 +24,7 @@
 }
 #diary p:first-of-type {
   margin-top: 3px;
-  font-size: 20px;
+  font-size: 15px;
   color: #444;
   word-spacing: 1px;
   font-weight: normal;
@@ -39,22 +40,23 @@
 
 #diary p.h4 {
   font-family: "Dancing Script", cursive;
-  font-size: 30px;
+  font-size: 22px;
   color: #be0aff;
 }
 
 #diary p#desc {
-  font-size: 20px;
+  font-size: 16px;
   font-family: "Ubuntu Mono", monospace;
 }
 
 #diary p#user {
   color: #03045e;
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 500;
 }
 
 #like {
+  font-size: 1rem;
   box-shadow: 0 2px 7px rgba(74, 73, 73, 0.46),
     0 3px 6px rgba(108, 108, 108, 0.32);
 }
@@ -63,9 +65,13 @@
   transform: scale(0.98);
 }
 
+.card-footer {
+  font-size: 13px;
+}
+
 #backHome a {
   padding: 4px 8px;
-  font-size: 1.8rem;
+  font-size: 1.3rem;
   font-family: "Eczar", serif;
   box-shadow: 0 2px 7px rgba(74, 73, 73, 0.46),
     0 3px 6px rgba(108, 108, 108, 0.32);

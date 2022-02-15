@@ -12,6 +12,12 @@
   color: #c13936;
 }
 
-.card a {
+.card a,
+button {
+  color: #fff;
+  text-shadow: 1.5px 1px black;
+}
+
+.card a:hover {
   color: #fff;
 }

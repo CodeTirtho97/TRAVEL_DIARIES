@@ -1,7 +1,7 @@
 <% layout('layouts/boilerplate')%>
     <link rel="stylesheet" href="/css/index.css">
     <div class="cover mb-5">
-        <p id="firstLine">Welcome to <b>Travel</b> <span>diaries</span></p>
+        <p id="firstLine">Welcome to <b>TRAVEL</b> <span>diaries</span></p>
         <p id="secondLine" class="mb-5">Your <span>Unofficial</span> Travel Guide!</p>
         <div class="subhead">
             <p class="mt-5">Feeling stressed about your next trip?</p>
@@ -16,7 +16,7 @@
             </span>
             <% let count=1 %>
                 <% for(let recentDiary of recentDiaries) { %>
-                    <div class="col-3">
+                    <div class=<%=recentDiaries.length> 3 ? 'col-md-3' : 'col-md-4' %>>
                         <div class="card mb-3">
                             <img src="<%= recentDiary.image %>" class="img img-fluid" alt="<%=recentDiary.title %>">
                             <div class="card-body">
@@ -58,7 +58,7 @@
             </span>
             <% count=1 %>
                 <% for(let mostLikedDiary of mostLikedDiaries) { %>
-                    <div class="col-md-3">
+                    <div class=<%=mostLikedDiaries.length> 3 ? 'col-md-3' : 'col-md-4' %>>
                         <div class="card mb-3">
                             <img src="<%= mostLikedDiary.image %>" class="img img-fluid"
                                 alt="<%=mostLikedDiary.title %>">

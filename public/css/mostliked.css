@@ -5,8 +5,8 @@ h1 {
   position: relative;
   text-align: center;
   color: #d62828;
-  font-size: 4rem;
-  margin-bottom: 4rem;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
 }
 
 h1:before,
@@ -52,7 +52,7 @@ h1:hover:after {
 }
 
 .card img {
-  height: 350px;
+  height: 300px;
   width: 500px;
 }
 
