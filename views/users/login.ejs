@@ -1,0 +1,42 @@
+<% layout('layouts/boilerplate')%>
+
+    <div class="container d-flex flex-column align-items-center vh-70 my-5 pt-5">
+        <div class="card" style="width: 50%">
+            <img src="https://images.unsplash.com/photo-1529539795054-3c162aab037a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+                class="card-img-top" alt="login">
+            <div class="card-body">
+                <h2 class="card-title d-flex justify-content-end font-weight-bold">LOGIN</h2>
+                <p class="card-text">
+                <blockquote class="blockquote text-muted">
+                    <span>"A journey of a thousand miles begins with a single step."</span>
+                </blockquote>
+                </p>
+                <form action="/login" method="POST" class="validated-form" novalidate>
+                    <div class="mb-3">
+                        <label class="form-label" for="username">Username</label>
+                        <input class="form-control" type="text" id="username" name="email" autofocus required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Username is required!
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="password">Password</label>
+                        <input class="form-control" type="password" id="password" name="password" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Password required!
+                        </div>
+                    </div>
+                    <button class="btn btn-success btn-block">Login</button>
+                </form>
+                <a class="btn btn-primary btn-block mt-3" href="/register">Not An User? Register Now</a>
+            </div>
+
+        </div>
+    </div>

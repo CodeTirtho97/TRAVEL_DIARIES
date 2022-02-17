@@ -5,10 +5,15 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const session = require("express-session");
 const flash = require("connect-flash");
+const passport = require("passport");
+const localStrategy = require("passport-local");
 const ExpressError = require("./utils/ExpressError");
 
-const diaries = require("./routes/diaries");
-const reviews = require("./routes/reviews");
+const User = require("./models/user");
+
+const userRoutes = require("./routes/user");
+const diaryRoutes = require("./routes/diaries");
+const reviewRoutes = require("./routes/reviews");
 
 mongoose.connect("mongodb://localhost:27017/travel-diaries", {
   useNewUrlParser: true,
@@ -44,15 +49,24 @@ const sessionConfig = {
 
 app.use(session(sessionConfig));
 app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new localStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
+  console.log(req.session);
+  res.locals.currentUser = req.user;
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
   next();
 });
 
-app.use("/diaries", diaries);
-app.use("/diaries/:id/reviews", reviews);
+app.use("/", userRoutes);
+app.use("/diaries", diaryRoutes);
+app.use("/diaries/:id/reviews", reviewRoutes);
 
 app.get("/", (req, res) => {
   res.render("home");

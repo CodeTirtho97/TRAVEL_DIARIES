@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Review = require("./review");
 const Schema = mongoose.Schema;
 
-const diariesSchema = new Schema({
+const diarySchema = new Schema({
   title: String,
   image: String,
   cost: Number,
@@ -30,7 +30,7 @@ const diariesSchema = new Schema({
   ],
 });
 
-diariesSchema.pre("save", function (next) {
+diarySchema.pre("save", function (next) {
   const now = this;
   now.updated = Date.now();
   if (!this.created) {
@@ -39,7 +39,7 @@ diariesSchema.pre("save", function (next) {
   next();
 });
 
-diariesSchema.post("findOneAndDelete", async function (doc) {
+diarySchema.post("findOneAndDelete", async function (doc) {
   if (doc) {
     await Review.deleteMany({
       _id: {
@@ -49,4 +49,4 @@ diariesSchema.post("findOneAndDelete", async function (doc) {
   }
 });
 
-module.exports = mongoose.model("Diary", diariesSchema);
+module.exports = mongoose.model("Diary", diarySchema);

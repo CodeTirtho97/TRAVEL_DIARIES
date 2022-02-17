@@ -3,6 +3,7 @@ const router = express.Router();
 const moment = require("moment");
 const catchAsync = require("../utils/catchAsync");
 const { diarySchema } = require("../JoiSchema");
+const { isLoggedIn } = require("../middleware");
 
 const ExpressError = require("../utils/ExpressError");
 
@@ -38,6 +39,7 @@ router.get(
 
 router.get(
   "/recent",
+  isLoggedIn,
   catchAsync(async (req, res) => {
     const recentDiaries = await Diary.find();
     recentDiaries.sort((a, b) => b.created - a.created);
@@ -47,6 +49,7 @@ router.get(
 
 router.get(
   "/mostliked",
+  isLoggedIn,
   catchAsync(async (req, res) => {
     const mostLikedDiaries = await Diary.find().populate("likes");
     mostLikedDiaries.sort((a, b) => b.likes.length - a.likes.length);
@@ -56,12 +59,13 @@ router.get(
   })
 );
 
-router.get("/new", (req, res) => {
+router.get("/new", isLoggedIn, (req, res) => {
   res.render("diaries/new");
 });
 
 router.post(
   "/",
+  isLoggedIn,
   validateDiary,
   catchAsync(async (req, res) => {
     const diary = new Diary(req.body.diary);
@@ -93,6 +97,7 @@ router.get(
 
 router.get(
   "/:id/edit",
+  isLoggedIn,
   catchAsync(async (req, res) => {
     const diary = await Diary.findById(req.params.id);
     res.render("diaries/edit", { diary });
@@ -101,6 +106,7 @@ router.get(
 
 router.put(
   "/:id",
+  isLoggedIn,
   validateDiary,
   catchAsync(async (req, res) => {
     const { id } = req.params;
@@ -114,6 +120,7 @@ router.put(
 
 router.delete(
   "/:id",
+  isLoggedIn,
   catchAsync(async (req, res) => {
     const { id } = req.params;
     await Diary.findByIdAndDelete(id);
@@ -124,6 +131,7 @@ router.delete(
 
 router.post(
   "/:id/likes",
+  isLoggedIn,
   catchAsync(async (req, res) => {
     const diary = await Diary.findById(req.params.id);
     const like = new Like(req.body.like);
