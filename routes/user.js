@@ -12,9 +12,9 @@ router.post(
   "/register",
   catchAsync(async (req, res, next) => {
     try {
-      const { firstname, lastname, email, username, password } = req.body;
-      const user = new User({ firstname, lastname, email, username });
-      // res.send(user);
+      const { firstname, lastname, username, password } = req.body;
+      const user = new User({ firstname, lastname, username });
+      console.log(user);
       const registeredUser = await User.register(user, password);
       // res.send(registeredUser);
       req.login(registeredUser, (err) => {
@@ -23,8 +23,7 @@ router.post(
         res.redirect("/diaries");
       });
     } catch (e) {
-      req.flash(e);
-      console.log(e);
+      req.flash("error", e.message);
       res.redirect("register");
     }
   })
@@ -41,7 +40,7 @@ router.post(
     failureRedirect: "/login",
   }),
   (req, res) => {
-    req.flash("success", `Welcome back, ${req.body.firstname.toUpperCase()}!`);
+    req.flash("success", `Welcome back!`);
     let str = req.session.returnTo;
     if (str !== undefined) {
       const haveReview = str.includes("/reviews");
