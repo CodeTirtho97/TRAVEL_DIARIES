@@ -1,0 +1,34 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
+
+#container {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  background: linear-gradient(
+    100deg,
+    rgba(250, 214, 195, 0.8) 30%,
+    #b0eae8 120%
+  );
+}
+
+.card {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.card-body h2 {
+  font-family: "Josefin Sans", sans-serif;
+  border-bottom: 1px dashed #444;
+}
+
+.card-body blockquote {
+  font-size: 14px;
+  font-style: italic;
+}
+
+.card button {
+  font-size: 16px;
+}
+
+form a {
+  font-size: 16px;
+}

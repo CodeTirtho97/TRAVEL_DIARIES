@@ -16,10 +16,15 @@ const diarySchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  author: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
   likes: [
     {
       type: Schema.Types.ObjectId,
       ref: "Like",
+      required: false,
     },
   ],
   reviews: [

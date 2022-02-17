@@ -2,23 +2,10 @@ const express = require("express");
 const router = express.Router();
 const moment = require("moment");
 const catchAsync = require("../utils/catchAsync");
-const { diarySchema } = require("../JoiSchema");
-const { isLoggedIn } = require("../middleware");
-
-const ExpressError = require("../utils/ExpressError");
+const { isLoggedIn, isAuthor, validateDiary } = require("../middleware");
 
 const Diary = require("../models/diary");
 const Like = require("../models/like");
-
-const validateDiary = (req, res, next) => {
-  const { error } = diarySchema.validate(req.body);
-  if (error) {
-    const msg = error.details.map((el) => el.message).join(",");
-    throw new ExpressError(msg, 400);
-  } else {
-    next();
-  }
-};
 
 router.get(
   "/",
@@ -69,6 +56,7 @@ router.post(
   validateDiary,
   catchAsync(async (req, res) => {
     const diary = new Diary(req.body.diary);
+    diary.author = req.user._id;
     await diary.save();
     req.flash("success", "Successfully Added a new Diary");
     res.redirect(`/diaries/${diary._id}`);
@@ -79,8 +67,20 @@ router.get(
   "/:id",
   catchAsync(async (req, res) => {
     const diary = await Diary.findById(req.params.id)
-      .populate("reviews")
-      .populate("likes");
+      .populate({
+        path: "reviews",
+        populate: {
+          path: "author",
+        },
+      })
+      .populate("author")
+      .populate({
+        path: "likes",
+        populate: {
+          path: "user",
+        },
+      });
+    console.log(diary);
     if (!diary) {
       req.flash("error", "Cannot find that Diary!");
       return res.redirect("/diaries");
@@ -98,8 +98,10 @@ router.get(
 router.get(
   "/:id/edit",
   isLoggedIn,
+  isAuthor,
   catchAsync(async (req, res) => {
-    const diary = await Diary.findById(req.params.id);
+    const { id } = req.params;
+    const diary = await Diary.findById(id);
     res.render("diaries/edit", { diary });
   })
 );
@@ -107,6 +109,7 @@ router.get(
 router.put(
   "/:id",
   isLoggedIn,
+  isAuthor,
   validateDiary,
   catchAsync(async (req, res) => {
     const { id } = req.params;
@@ -121,6 +124,7 @@ router.put(
 router.delete(
   "/:id",
   isLoggedIn,
+  isAuthor,
   catchAsync(async (req, res) => {
     const { id } = req.params;
     await Diary.findByIdAndDelete(id);
@@ -139,8 +143,16 @@ router.post(
     like.count++;
     await like.save();
     await diary.save();
-    req.flash("success", "Successfully Liked Diary!");
-    res.redirect(`/diaries/${diary._id}`);
+    let str = req.originalUrl;
+    if (str !== undefined) {
+      const haveLikes = str.includes("/likes");
+      if (haveLikes) {
+        const i = str.indexOf("/likes");
+        str = str.slice(0, i);
+      }
+    }
+    const redirectUrl = str || "/diaries";
+    res.redirect(redirectUrl);
   })
 );
 

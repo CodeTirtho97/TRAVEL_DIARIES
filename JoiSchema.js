@@ -16,9 +16,3 @@ module.exports.reviewSchema = Joi.object({
     comment: Joi.string().required(),
   }).required(),
 });
-
-module.exports.likeSchema = Joi.object({
-  like: Joi.object({
-    count: Joi.number().min(0),
-  }).required(),
-});
