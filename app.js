@@ -11,7 +11,7 @@ const ExpressError = require("./utils/ExpressError");
 
 const User = require("./models/user");
 
-const userRoutes = require("./routes/user");
+const userRoutes = require("./routes/users");
 const diaryRoutes = require("./routes/diaries");
 const reviewRoutes = require("./routes/reviews");
 
