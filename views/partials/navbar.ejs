@@ -28,7 +28,7 @@
                             DIARIES</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link fw-bold" href="/diaries/mostliked">LOVED
+                        <a class="nav-link fw-bold" href="/diaries/alldiaries">ALL
                             DIARIES</a>
                     </li>
                     <li class="nav-item">
@@ -37,12 +37,12 @@
                 </ul>
                 <div class="navbar-nav ml-auto">
                     <% if(!currentUser) { %>
-                        <a class="nav-link" href="/login">LOGIN</a>
+                        <a class="nav-link font-weight-bold" href="/login">LOGIN</a>
                         <% } else { %>
-                            <span class="nav-link mr-1">
+                            <span class="nav-link mr-1 font-weight-bold font-italic text-white">
                                 <%= currentUser.firstname %>
                             </span>
-                            <a class="nav-link" href="/logout">LOGOUT</a>
+                            <a class="nav-link font-weight-bold" href="/logout">LOGOUT</a>
                             <% } %>
                 </div>
             </div>

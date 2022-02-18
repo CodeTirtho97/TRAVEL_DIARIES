@@ -54,31 +54,27 @@
         </div>
         <div class="row">
             <span class="heading">
-                <a href="/diaries/mostliked">Most Liked...</a>
+                <a href="/diaries/alldiaries">Explore...</a>
             </span>
             <% count=1 %>
-                <% for(let mostLikedDiary of mostLikedDiaries) { %>
-                    <div class=<%=mostLikedDiaries.length> 3 ? 'col-md-3' : 'col-md-4' %>>
+                <% for(let diary of allDiaries) { %>
+                    <div class=<%=allDiaries.length> 3 ? 'col-md-3' : 'col-md-4' %>>
                         <div class="card mb-3">
-                            <img src="<%= mostLikedDiary.image %>" class="img img-fluid"
-                                alt="<%=mostLikedDiary.title %>">
+                            <img src="<%= diary.image %>" class="img img-fluid" alt="<%=diary.title %>">
                             <div class="card-body">
                                 <h5 class="card-title">
-                                    <%= mostLikedDiary.title %>
+                                    <%= diary.title %>
                                 </h5>
                                 <p class="card-text">
                                     <small class="text-muted">
-                                        <%= mostLikedDiary.location%>
+                                        <%= diary.location%>
                                     </small>
                                 </p>
                                 <p class="card-text">
-                                    <%= mostLikedDiary.description.slice(0,50)%>...
+                                    <%= diary.description.slice(0,50)%>...
                                 </p>
                                 <div>
-                                    <p class="text-muted float-start">
-                                        <%= mostLikedDiary.likes.length%> likes
-                                    </p>
-                                    <a href="/diaries/<%= mostLikedDiary._id %>" class="btn btn-primary float-end">See
+                                    <a href="/diaries/<%= diary._id %>" class="btn btn-primary float-end">See
                                         Diary ></a>
                                 </div>
                             </div>
@@ -87,9 +83,9 @@
                     <% count++ %>
                         <% if(count> 3) break %>
                             <% } %>
-                                <% if(recentDiaries.length> 3) { %>
+                                <% if(allDiaries.length> 3) { %>
                                     <div class="more col d-flex justify-content-center align-items-center">
-                                        <a class="btn btn-lg btn-outline-danger" href="/diaries/mostliked">See More
+                                        <a class="btn btn-lg btn-outline-danger" href="/diaries/alldiaries">See More
                                             &#9112;</a>
                                     </div>
                                     <% } %>

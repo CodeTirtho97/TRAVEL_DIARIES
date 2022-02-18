@@ -20,13 +20,6 @@ const diarySchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "User",
   },
-  likes: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Like",
-      required: false,
-    },
-  ],
   reviews: [
     {
       type: Schema.Types.ObjectId,

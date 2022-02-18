@@ -23,7 +23,7 @@ const seedDB = async () => {
     const random1000 = Math.floor(Math.random() * 1000);
     const cost = Math.floor(Math.random() * 90 + 10) * 100;
     const diary = new Diaries({
-      author: "620e2c6891adb3a9117b5f5b",
+      author: "620fb59388fdb726f0a4180e",
       title: `${test(descriptors)} ${test(places)}`,
       image: "https://source.unsplash.com/random/600x400?india",
       cost,

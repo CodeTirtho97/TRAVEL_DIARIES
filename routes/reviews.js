@@ -6,6 +6,7 @@ const { validateReview, isLoggedIn, isReviewAuthor } = require("../middleware");
 const Diary = require("../models/diary");
 const Review = require("../models/review");
 
+const ExpressError = require("../utils/ExpressError");
 const catchAsync = require("../utils/catchAsync");
 
 router.post(
@@ -15,6 +16,7 @@ router.post(
   catchAsync(async (req, res) => {
     const diary = await Diary.findById(req.params.id);
     const review = new Review(req.body.review);
+    review.author = req.user._id;
     diary.reviews.push(review);
     await review.save();
     await diary.save();

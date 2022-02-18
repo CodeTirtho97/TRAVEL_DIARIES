@@ -86,6 +86,18 @@
   /* border-right: 0.1px solid #222; */
 }
 
+#reviews h4 {
+  font-size: 20px;
+}
+
+#reviews h6 {
+  font-size: 13px;
+}
+
+#reviews p {
+  font-size: 18px;
+}
+
 #map {
   padding-left: 30px;
 }

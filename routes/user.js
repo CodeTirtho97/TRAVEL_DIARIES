@@ -40,7 +40,7 @@ router.post(
     failureRedirect: "/login",
   }),
   (req, res) => {
-    req.flash("success", `Welcome back!`);
+    req.flash("success", "Welcome back!");
     let str = req.session.returnTo;
     if (str !== undefined) {
       const haveReview = str.includes("/reviews");

@@ -5,21 +5,17 @@ const catchAsync = require("../utils/catchAsync");
 const { isLoggedIn, isAuthor, validateDiary } = require("../middleware");
 
 const Diary = require("../models/diary");
-const Like = require("../models/like");
 
 router.get(
   "/",
   catchAsync(async (req, res) => {
     const recentDiaries = await Diary.find();
-    const mostLikedDiaries = await Diary.find().populate("likes");
+    const allDiaries = await Diary.find();
 
     recentDiaries.sort((a, b) => b.created - a.created);
-    // console.log(recentDiaries);
-    mostLikedDiaries.sort((a, b) => b.likes.length - a.likes.length);
-    // console.log(mostLikedDiaries);
     res.render("diaries/index", {
       recentDiaries,
-      mostLikedDiaries,
+      allDiaries,
     });
   })
 );
@@ -35,13 +31,11 @@ router.get(
 );
 
 router.get(
-  "/mostliked",
-  isLoggedIn,
+  "/alldiaries",
   catchAsync(async (req, res) => {
-    const mostLikedDiaries = await Diary.find().populate("likes");
-    mostLikedDiaries.sort((a, b) => b.likes.length - a.likes.length);
-    res.render("diaries/mostliked", {
-      mostLikedDiaries,
+    const allDiaries = await Diary.find();
+    res.render("diaries/alldiaries", {
+      allDiaries,
     });
   })
 );
@@ -73,13 +67,7 @@ router.get(
           path: "author",
         },
       })
-      .populate("author")
-      .populate({
-        path: "likes",
-        populate: {
-          path: "user",
-        },
-      });
+      .populate("author");
     console.log(diary);
     if (!diary) {
       req.flash("error", "Cannot find that Diary!");
@@ -102,6 +90,10 @@ router.get(
   catchAsync(async (req, res) => {
     const { id } = req.params;
     const diary = await Diary.findById(id);
+    if (!diary) {
+      req.flash("error", "Cannot find that diary!");
+      return res.redirect("/diaries");
+    }
     res.render("diaries/edit", { diary });
   })
 );
@@ -130,29 +122,6 @@ router.delete(
     await Diary.findByIdAndDelete(id);
     req.flash("success", "Successfully Deleted Diary!");
     res.redirect("/diaries");
-  })
-);
-
-router.post(
-  "/:id/likes",
-  isLoggedIn,
-  catchAsync(async (req, res) => {
-    const diary = await Diary.findById(req.params.id);
-    const like = new Like(req.body.like);
-    diary.likes.push(like);
-    like.count++;
-    await like.save();
-    await diary.save();
-    let str = req.originalUrl;
-    if (str !== undefined) {
-      const haveLikes = str.includes("/likes");
-      if (haveLikes) {
-        const i = str.indexOf("/likes");
-        str = str.slice(0, i);
-      }
-    }
-    const redirectUrl = str || "/diaries";
-    res.redirect(redirectUrl);
   })
 );
 

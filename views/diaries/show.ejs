@@ -15,48 +15,32 @@
                             <%=diary.location %>
                         </p>
                         <hr>
-                        <% if(currentUser){ %>
-                            <form action="/diaries/<%= diary._id %>/likes" method="POST">
-                                <p class="float-right mt-1">
-                                    <button id="like" class=<%((diary.likes) &&
-                                        (diary.likes.user._id===currentUser._id))
-                                        ? 'btn btn-outline-success btn-lg disabled' : 'btn btn-outline-success btn-lg'
-                                        %> name="like[count]">Like
-                                        &#128077;</button>
-                                </p>
-                            </form>
-                            <% } else { %>
-                                <p class="float-right mt-1 text-muted font-italic">LOGIN to like diary!</p>
-                                <% } %>
-                                    <p>
-                                        <%= diary.likes.length %> like(s)
-                                    </p>
-                                    <p class="h4 card-text py-3">Costs Around &#8377;<%= diary.cost %>
-                                            <!-- <a class="likeicon float-end" onclink="updateLikes()"><i
+                        <p class="h4 card-text py-3">Costs Around &#8377;<%= diary.cost %>
+                                <!-- <a class="likeicon float-end" onclink="updateLikes()"><i
                                         class="fa-regular fa-heart fa-2x"></i></a> -->
-                                    </p>
-                                    <p id="desc" class="card-text pb-3">
-                                        <%= diary.description %>
-                                    </p>
-                                    <p id="user" class="card-text pb-3">
-                                        &#128221; Posted by: <%= diary.author.firstname %>
-                                            <%= diary.author.lastname %>
-                                    </p>
-                                    <hr>
-                                    <% if(currentUser && diary.author.equals(currentUser._id)) { %>
-                                        <div>
-                                            <a class="col-md-4 float-left btn btn-warning p-1 mx-1"
-                                                href="/diaries/<%= diary._id %>/edit">&#128221; Edit
-                                                Diary</a>
-                                            <p>
-                                            <form action="/diaries/<%= diary._id %>?_method=DELETE" method="POST">
-                                                <button class="col-md-4 float-right btn btn-danger p-1 mx-1">Delete
-                                                    Diary
-                                                    &#9760;</button>
-                                            </form>
-                                            </p>
-                                        </div>
-                                        <% } %>
+                        </p>
+                        <p id="desc" class="card-text pb-3">
+                            <%= diary.description %>
+                        </p>
+                        <p id="user" class="card-text pb-3">
+                            &#128221; Posted by: <%= diary.author.firstname %>
+                                <%= diary.author.lastname %>
+                        </p>
+                        <% if(currentUser && diary.author.equals(currentUser._id)) { %>
+                            <hr>
+                            <div>
+                                <a class="col-md-4 float-left btn btn-warning p-1 mx-1"
+                                    href="/diaries/<%= diary._id %>/edit">&#128221; Edit
+                                    Diary</a>
+                                <p>
+                                <form action="/diaries/<%= diary._id %>?_method=DELETE" method="POST">
+                                    <button class="col-md-4 float-right btn btn-danger p-1 mx-1">Delete
+                                        Diary
+                                        &#9760;</button>
+                                </form>
+                                </p>
+                            </div>
+                            <% } %>
                     </div>
                     <div class="card-footer">
                         <small class="text-muted">Created: <%= createdDate %></small>
@@ -77,15 +61,20 @@
                     <% for(let review of diary.reviews) { %>
                         <div id="review" class="card mb-3">
                             <div class="card-body">
-                                <h6 class="card-title">Rating: <%= review.rating %>
+                                <h4 class="card-title">Rating: <%= review.rating %>
+                                </h4>
+                                <h6 class="card-subtitle mb-2 text-muted">By <%= review.author.firstname%>
+                                        <%= review.author.lastname %>
                                 </h6>
                                 <p class="card-text">
                                     <%= review.comment %>
                                 </p>
-                                <form action="/diaries/<%= diary._id %>/reviews/<%= review._id %>?_method=DELETE"
-                                    method="POST">
-                                    <button class="btn btn-sm btn-danger">Delete</button>
-                                </form>
+                                <% if( currentUser && review.author.equals(currentUser._id)) {%>
+                                    <form action="/diaries/<%= diary._id %>/reviews/<%= review._id %>?_method=DELETE"
+                                        method="POST">
+                                        <button class="btn btn-sm btn-danger">Delete</button>
+                                    </form>
+                                    <% } %>
                             </div>
                         </div>
                         <% } %>
@@ -161,13 +150,3 @@
             </div>
         </div>
     </div>
-
-    <!-- <script>
-        if ( currentUser ) {
-            const like = document.getElementById( 'like' );
-            like.addEventListener( 'click', () => {
-                like.innerHTML += 'disabled';
-                like.innerText = 'Liked';
-            } );
-        }
-    </script> -->
