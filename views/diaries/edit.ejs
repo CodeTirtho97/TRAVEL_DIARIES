@@ -15,7 +15,7 @@
                             Experience
                             &#128524;</h2>
                         <form action="/diaries/<%= diary._id %>?_method=PUT" method="POST" novalidate
-                            class="validated-form my-3">
+                            class="validated-form my-3" enctype="multipart/form-data">
                             <div class="mb-3">
                                 <label for="title" class="form-label h6 fw-bold">What'll Your Travel Diary Be
                                     Called?</label>
@@ -41,18 +41,18 @@
                                     Share your travel destination!
                                 </div>
                             </div>
-                            <div class="mb-3">
+                            <!-- <div class="mb-3">
                                 <label for="image" class="form-label h6 fw-bold">Care To Share Some Photos?</label>
                                 <input type="text" class="form-control" id="image" name="diary[image]"
                                     aria-describedby="diaryPhotos" placeholder="Enter Image URL"
-                                    value="<%= diary.image %>" required>
+                                    value="" required>
                                 <div class="valid-feedback">
                                     Looks good!
                                 </div>
                                 <div class="invalid-feedback">
                                     Don't feel shy to share your travel clicks!
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="mb-3">
                                 <label for="cost" class="form-label h6 fw-bold">How Much Did It Cost? <small
                                         class="fst-italic text-muted">(Approx)</small></label></label>
@@ -81,6 +81,28 @@
                                 <div class="invalid-feedback">
                                     Must Share about your travel!
                                 </div>
+                            </div>
+                            <div class="mb-4">
+                                <label for="images" class="form-label">Care To Share Some Photos? <small
+                                        class="font-italic text-muted">(Max.
+                                        4)</small></label>
+                                <input class="form-control" type="file" name="images" id="images" multiple required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Don't feel shy to share your travel clicks!
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <% diary.images.forEach(function(img, i) { %>
+                                    <img src="<%=img.thumbnail %>" class="img-thumbnail" alt="">
+                                    <div class="form-check-inline">
+                                        <input type="checkbox" id="image-<%=i%>" name="deleteImages[]"
+                                            value="<%=img.filename%>">
+                                    </div>
+                                    <label for="image-<%=i%>">Delete?</label>
+                                    <% })%>
                             </div>
                             <div class="mb-5">
                                 <a class="col-md-5 btn btn-warning btn-lg float-left font-weight-bold" href="/diaries">

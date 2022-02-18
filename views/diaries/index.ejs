@@ -18,7 +18,8 @@
                 <% for(let recentDiary of recentDiaries) { %>
                     <div class=<%=recentDiaries.length> 3 ? 'col-md-3' : 'col-md-4' %>>
                         <div class="card mb-3">
-                            <img src="<%= recentDiary.image %>" class="img img-fluid" alt="<%=recentDiary.title %>">
+                            <img src="<%= recentDiary.images[0].url %>" class="img img-fluid"
+                                alt="<%=recentDiary.title %>">
                             <div class="card-body">
                                 <h5 class="card-title">
                                     <%= recentDiary.title %>
@@ -60,7 +61,7 @@
                 <% for(let diary of allDiaries) { %>
                     <div class=<%=allDiaries.length> 3 ? 'col-md-3' : 'col-md-4' %>>
                         <div class="card mb-3">
-                            <img src="<%= diary.image %>" class="img img-fluid" alt="<%=diary.title %>">
+                            <img src="<%= diary.images[0].url %>" class="img img-fluid" alt="<%=diary.title %>">
                             <div class="card-body">
                                 <h5 class="card-title">
                                     <%= diary.title %>

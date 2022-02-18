@@ -1,5 +1,6 @@
 const Diary = require("../models/diary");
 const moment = require("moment");
+const { cloudinary } = require("../cloudinary");
 
 module.exports.index = async (req, res) => {
   const recentDiaries = await Diary.find();
@@ -31,8 +32,13 @@ module.exports.renderNewForm = (req, res) => {
 
 module.exports.createDiary = async (req, res) => {
   const diary = new Diary(req.body.diary);
+  diary.images = req.files.map((f) => ({
+    url: f.path,
+    filename: f.filename,
+  }));
   diary.author = req.user._id;
   await diary.save();
+  console.log(diary);
   req.flash("success", "Successfully Added a new Diary");
   res.redirect(`/diaries/${diary._id}`);
 };
@@ -73,8 +79,18 @@ module.exports.renderEditForm = async (req, res) => {
 module.exports.updateDiary = async (req, res) => {
   const { id } = req.params;
   const diary = await Diary.findByIdAndUpdate(id, { ...req.body.diary });
+  const imgs = req.files.map((f) => ({ url: f.path, filename: f.filename }));
+  diary.images.push(...imgs);
   diary.updated = Date.now();
   await diary.save();
+  if (req.body.deleteImages) {
+    for (let filename of req.body.deleteImages) {
+      await cloudinary.uploader.destroy(filename);
+    }
+    await campground.updateOne({
+      $pull: { images: { filename: { $in: req.body.deleteImages } } },
+    });
+  }
   req.flash("success", "Successfully Updated Diary!");
   res.redirect(`/diaries/${diary._id}`);
 };

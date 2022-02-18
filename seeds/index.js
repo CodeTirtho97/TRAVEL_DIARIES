@@ -25,7 +25,16 @@ const seedDB = async () => {
     const diary = new Diaries({
       author: "620fb59388fdb726f0a4180e",
       title: `${test(descriptors)} ${test(places)}`,
-      image: "https://source.unsplash.com/random/600x400?india",
+      images: [
+        {
+          url: "https://res.cloudinary.com/tirthoyelpcamp/image/upload/v1645221214/TravelDiaries/r37b5rgy8qgei4qsv2ep.jpg",
+          filename: "TravelDiaries/r37b5rgy8qgei4qsv2ep",
+        },
+        {
+          url: "https://res.cloudinary.com/tirthoyelpcamp/image/upload/v1645221214/TravelDiaries/ywgmlzjzv5zb2uhyyr2a.jpg",
+          filename: "TravelDiaries/ywgmlzjzv5zb2uhyyr2a",
+        },
+      ],
       cost,
       description:
         "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsa quibusdam consectetur ab! Saepe sit optio illo, eum at reiciendis necessitatibus ipsum quis? Magni optio natus doloremque assumenda a eos ab nostrum distinctio, vitae, ullam soluta ut similique harum blanditiis eaque inventore. Fugiat ullam minima eveniet quam sint, nisi sapiente dolorum.",

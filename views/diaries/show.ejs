@@ -4,8 +4,28 @@
     <div class="container-fluid my-4">
         <div class="row">
             <div class="col-md-10 offset-1">
-                <div id="diary" class="card mt-4">
-                    <img src="<%= diary.image %>" class="card-img-top img img-fluid" alt="<%= diary.title %>" />
+                <div class="card mt-4">
+                    <!-- <img src="<%= diary.image %>" class="card-img-top img img-fluid" alt="<%= diary.title %>" /> -->
+                    <div id="campgroundCarousel" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <% diary.images.forEach((img, i)=> { %>
+                                <div id="diary" class="carousel-item <%= i === 0 ? 'active' : ''%>">
+                                    <img src="<%= img.url%>" class="d-block w-100 img-fluid" alt="">
+                                </div>
+                                <% }) %>
+
+                        </div>
+                        <% if(diary.images.length> 1) {%>
+                            <a class="carousel-control-prev" href="#campgroundCarousel" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#campgroundCarousel" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                            <% } %>
+                    </div>
                     <div class="card-body">
                         <!-- <a class="likeicon float-start" onclink="updateLikes()"><i
                                 class="fa-regular fa-heart fa-2x"></i></a> -->
