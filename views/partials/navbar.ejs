@@ -39,7 +39,7 @@
                     <% if(!currentUser) { %>
                         <a class="nav-link font-weight-bold" href="/login">LOGIN</a>
                         <% } else { %>
-                            <span class="nav-link mr-1 font-weight-bold font-italic text-white">
+                            <span class="nav-link mr-1 font-weight-bold font-italic text-white d-none d-lg-block">
                                 <%= currentUser.firstname %>
                             </span>
                             <a class="nav-link font-weight-bold" href="/logout">LOGOUT</a>

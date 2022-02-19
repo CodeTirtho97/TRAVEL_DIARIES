@@ -4,27 +4,16 @@ h1 {
   font-size: 2rem;
   font-weight: 700;
   font-family: "Rokkitt", serif;
-  text-transform: uppercase;
+  position: relative;
   text-align: center;
   letter-spacing: 0.5px;
-  margin: 2rem 1rem;
+  margin: 2rem 1.5rem;
   white-space: nowrap;
   background-color: #eae2cc;
   border: 2px solid #222;
   border-radius: 5px;
-  padding: 4px 9px 2px 9px;
+  padding: 0.8rem 0.5rem;
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
-}
-h1:before,
-.thirteen h1:after {
-  background-color: #c50000;
-  position: absolute;
-  content: "";
-  height: 7px;
-
-  width: 7px;
-  border-radius: 50%;
-  bottom: 12px;
 }
 h1:before {
   left: -20px;

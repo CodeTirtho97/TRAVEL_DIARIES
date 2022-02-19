@@ -33,7 +33,7 @@ router
   .put(
     isLoggedIn,
     isAuthor,
-    upload.array("image", 4),
+    upload.array("images", 4),
     validateDiary,
     catchAsync(diaries.updateDiary)
   )

@@ -38,7 +38,6 @@ module.exports.createDiary = async (req, res) => {
   }));
   diary.author = req.user._id;
   await diary.save();
-  console.log(diary);
   req.flash("success", "Successfully Added a new Diary");
   res.redirect(`/diaries/${diary._id}`);
 };
@@ -52,7 +51,6 @@ module.exports.showDiary = async (req, res) => {
       },
     })
     .populate("author");
-  console.log(diary);
   if (!diary) {
     req.flash("error", "Cannot find that Diary!");
     return res.redirect("/diaries");
@@ -87,7 +85,7 @@ module.exports.updateDiary = async (req, res) => {
     for (let filename of req.body.deleteImages) {
       await cloudinary.uploader.destroy(filename);
     }
-    await campground.updateOne({
+    await diary.updateOne({
       $pull: { images: { filename: { $in: req.body.deleteImages } } },
     });
   }

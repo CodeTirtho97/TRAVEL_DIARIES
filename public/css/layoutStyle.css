@@ -1,8 +1,37 @@
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #013a63 #ffffff;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #013a63;
+  border-radius: 14px;
+  border: 1px solid #ffffff;
+}
+
 body {
   background-color: #fffffc;
 }
 
-.container {
-  margin: 0 6rem;
-  padding: 0 6rem;
+footer {
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 1200px) {
+  .container {
+    margin: 0 auto;
+    padding: 0 suto;
+  }
 }
