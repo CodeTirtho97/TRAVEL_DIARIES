@@ -1,5 +1,8 @@
 const Diary = require("../models/diary");
 const moment = require("moment");
+const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
+const mapBoxToken = process.env.MAPBOX_TOKEN;
+const geocoder = mbxGeocoding({ accessToken: mapBoxToken });
 const { cloudinary } = require("../cloudinary");
 
 module.exports.index = async (req, res) => {
@@ -30,14 +33,23 @@ module.exports.renderNewForm = (req, res) => {
   res.render("diaries/new");
 };
 
-module.exports.createDiary = async (req, res) => {
+module.exports.createDiary = async (req, res, next) => {
+  const geoData = await geocoder
+    .forwardGeocode({
+      query: req.body.diary.location,
+      limit: 1,
+    })
+    .send();
+  // console.log(geoData.body.features.geometry.coordinates);
   const diary = new Diary(req.body.diary);
+  diary.geometry = geoData.body.features[0].geometry;
   diary.images = req.files.map((f) => ({
     url: f.path,
     filename: f.filename,
   }));
   diary.author = req.user._id;
   await diary.save();
+  console.log(diary);
   req.flash("success", "Successfully Added a new Diary");
   res.redirect(`/diaries/${diary._id}`);
 };

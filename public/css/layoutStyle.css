@@ -29,6 +29,21 @@ footer {
   padding: 0;
 }
 
+.navbar {
+  background-color: #013a63;
+  font-size: 15px;
+}
+
+.navbar-brand {
+  font-size: 23px;
+  font-weight: bolder;
+}
+
+.navbar-brand span {
+  font-style: italic;
+  font-weight: lighter;
+}
+
 @media (min-width: 1200px) {
   .container {
     margin: 0 auto;

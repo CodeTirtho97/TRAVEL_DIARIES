@@ -8,7 +8,7 @@ const ImageSchema = new Schema({
 });
 
 ImageSchema.virtual("thumbnail").get(function () {
-  return this.url.replace("/upload", "/upload/w_200,h_200");
+  return this.url.replace("/upload", "/upload/w_100,h_100");
 });
 
 const diarySchema = new Schema({
@@ -17,6 +17,17 @@ const diarySchema = new Schema({
   cost: Number,
   description: String,
   location: String,
+  geometry: {
+    type: {
+      type: String,
+      enum: ["Point"],
+      required: true,
+    },
+    coordinates: {
+      type: [Number],
+      required: true,
+    },
+  },
   created: {
     type: Date,
     default: Date.now,
@@ -35,6 +46,10 @@ const diarySchema = new Schema({
       ref: "Review",
     },
   ],
+});
+
+diarySchema.virtual("shortLoc").get(function () {
+  return this.location.split(",").splice(-2).join(",");
 });
 
 diarySchema.pre("save", function (next) {

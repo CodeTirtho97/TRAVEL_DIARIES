@@ -5,12 +5,11 @@
         <div class="row">
             <div class="col-md-10 offset-md-1">
                 <div id="diary" class="card mt-4">
-                    <!-- <img src="<%= diary.image %>" class="card-img-top img img-fluid" alt="<%= diary.title %>" /> -->
                     <div id="campgroundCarousel" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
                             <% diary.images.forEach((img, i)=> { %>
                                 <div id="diary-img" class="carousel-item <%= i === 0 ? 'active' : ''%>">
-                                    <img src="<%= img.url%>" class="d-block w-100 img-fluid" alt="">
+                                    <img src="<%= img.url%>" class="d-block img-fluid" alt="<%= diary.title %> ">
                                 </div>
                                 <% }) %>
 
@@ -32,8 +31,8 @@
                         <h5 class="display-5 card-title text-center">
                             <%= diary.title %>
                         </h5>
-                        <p class="h5 card-text text-muted pb-2 text-center">
-                            <%=diary.location %>
+                        <p class=" h5 card-text text-muted pb-2 text-center">
+                            <%=diary.shortLoc %>
                         </p>
                         <hr>
                         <p class="h4 card-text py-3">Costs Around &#8377;<%= diary.cost %>
@@ -75,133 +74,162 @@
                 Back to
                 Home</a>
         </p>
-        <div class="row">
-            <div id="reviews" class="col-md-5 offset-md-1">
-                <% if(diary.reviews.length) { %>
-                    <h5 class="mb-2 float">See What People Say...</h5>
-                    <% for(let review of diary.reviews) { %>
-                        <div id="review" class="card mb-3">
-                            <div class="card-body">
-                                <span class="starability-result mb-5" data-rating="<%=review.rating%>">
-                                    Rated: <%= review.rating %> stars
-                                </span>
-                                <h6 class="card-subtitle mb-2 text-muted float-right">By <%= review.author.firstname%>
-                                        <%= review.author.lastname %>
-                                </h6>
-                                <p class="card-text mt-4">
-                                    <%= review.comment %>
-                                </p>
-                                <% if( currentUser && review.author.equals(currentUser._id)) {%>
-                                    <form action="/diaries/<%= diary._id %>/reviews/<%= review._id %>?_method=DELETE"
-                                        method="POST">
-                                        <button class="btn btn-sm btn-danger">Delete</button>
-                                    </form>
-                                    <% } %>
-                            </div>
-                        </div>
-                        <% } %>
-                            <% } else { %>
-                                <% if(currentUser) { %>
-                                    <h3 class="mb-2">Be the first to leave a comment...</h3>
-                                    <% } %>
-                                        <% } %>
-                                            <% if(currentUser) { %>
-                                                <% if(diary.reviews.length>= 0 && diary.reviews.length < 5) { %>
-                                                        <% if(diary.reviews.length) {%>
-                                                            <h5>Leave a Comment</h5>
-                                                            <% } %>
-                                                                <form action="/diaries/<%= diary._id %>/reviews"
-                                                                    method="POST" class="mb-3 validated-form"
-                                                                    novalidate>
-                                                                    <!-- <div class="mb-3">
+        <% if(diary.reviews.length===0 && !currentUser) { %>
+            <h3 class="row text-muted d-flex justify-content-center">Login to know more!</h3>
+            <% } %>
+                <div class="row">
+                    <div id="reviews" class="col-md-5 offset-md-1">
+                        <% if(diary.reviews.length) { %>
+                            <h5 class="mb-2 float">See What People Say...</h5>
+                            <% for(let review of diary.reviews) { %>
+                                <div id="review" class="card mb-3">
+                                    <div class="card-body">
+                                        <span class="starability-result mb-5" data-rating="<%=review.rating%>">
+                                            Rated: <%= review.rating %> stars
+                                        </span>
+                                        <h6 class="card-subtitle mb-2 text-muted float-right">By <%=
+                                                review.author.firstname%>
+                                                <%= review.author.lastname %>
+                                        </h6>
+                                        <p class="card-text mt-4">
+                                            <%= review.comment %>
+                                        </p>
+                                        <% if( currentUser && review.author.equals(currentUser._id)) {%>
+                                            <form
+                                                action="/diaries/<%= diary._id %>/reviews/<%= review._id %>?_method=DELETE"
+                                                method="POST">
+                                                <button class="btn btn-sm btn-danger float-right">Delete</button>
+                                            </form>
+                                            <% } %>
+                                    </div>
+                                </div>
+                                <% } %>
+                                    <% } else { %>
+                                        <% if(currentUser) { %>
+                                            <h3 class="mb-2">Be the first to leave a comment...</h3>
+                                            <% } %>
+                                                <% } %>
+                                                    <% if(currentUser) { %>
+                                                        <% if(diary.reviews.length>= 0 && diary.reviews.length < 5) { %>
+                                                                <% if(diary.reviews.length) {%>
+                                                                    <h5>Leave a Comment</h5>
+                                                                    <% } %>
+                                                                        <form action="/diaries/<%= diary._id %>/reviews"
+                                                                            method="POST" class="mb-3 validated-form"
+                                                                            novalidate>
+                                                                            <!-- <div class="mb-3">
                                                                         <label class="form-label mt-3"
                                                                             for="rating">Rating</label>
                                                                         <input class="form-range" type="range" min="1"
                                                                             max="5" name="review[rating]" id="rating">
                                                                     </div> -->
-                                                                    <fieldset class="starability-heartbeat">
-                                                                        <input type="radio" id="no-rate"
-                                                                            class="input-no-rate" name="review[rating]"
-                                                                            value="1" checked aria-label="No rating." />
-                                                                        <input type="radio" id="first-rate1"
-                                                                            name="review[rating]" value="1" />
-                                                                        <label for="first-rate1" title="Terrible">1
-                                                                            star</label>
-                                                                        <input type="radio" id="first-rate2"
-                                                                            name="review[rating]" value="2" />
-                                                                        <label for="first-rate2" title="Not good">2
-                                                                            stars</label>
-                                                                        <input type="radio" id="first-rate3"
-                                                                            name="review[rating]" value="3" />
-                                                                        <label for="first-rate3" title="Average">3
-                                                                            stars</label>
-                                                                        <input type="radio" id="first-rate4"
-                                                                            name="review[rating]" value="4" />
-                                                                        <label for="first-rate4" title="Very good">4
-                                                                            stars</label>
-                                                                        <input type="radio" id="first-rate5"
-                                                                            name="review[rating]" value="5" />
-                                                                        <label for="first-rate5" title="Amazing">5
-                                                                            stars</label>
-                                                                    </fieldset>
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label" for="body">Comment:
-                                                                        </label>
-                                                                        <textarea class="form-control"
-                                                                            name="review[comment]" id="body" cols="30"
-                                                                            rows="3" required></textarea>
-                                                                        <div class="valid-feedback">
-                                                                            Looks good!
-                                                                        </div>
-                                                                        <div class="invalid-feedback">
-                                                                            Write Something!
-                                                                        </div>
-                                                                    </div>
-                                                                    <button
-                                                                        class="btn float-right btn-success">Submit</button>
-                                                                </form>
-                                                                <% } %>
-                                                                    <% } %>
-            </div>
-            <div id="map" class="col-md-5">
+                                                                            <fieldset class="starability-heartbeat">
+                                                                                <input type="radio" id="no-rate"
+                                                                                    class="input-no-rate"
+                                                                                    name="review[rating]" value="1"
+                                                                                    checked aria-label="No rating." />
+                                                                                <input type="radio" id="first-rate1"
+                                                                                    name="review[rating]" value="1" />
+                                                                                <label for="first-rate1"
+                                                                                    title="Terrible">1
+                                                                                    star</label>
+                                                                                <input type="radio" id="first-rate2"
+                                                                                    name="review[rating]" value="2" />
+                                                                                <label for="first-rate2"
+                                                                                    title="Not good">2
+                                                                                    stars</label>
+                                                                                <input type="radio" id="first-rate3"
+                                                                                    name="review[rating]" value="3" />
+                                                                                <label for="first-rate3"
+                                                                                    title="Average">3
+                                                                                    stars</label>
+                                                                                <input type="radio" id="first-rate4"
+                                                                                    name="review[rating]" value="4" />
+                                                                                <label for="first-rate4"
+                                                                                    title="Very good">4
+                                                                                    stars</label>
+                                                                                <input type="radio" id="first-rate5"
+                                                                                    name="review[rating]" value="5" />
+                                                                                <label for="first-rate5"
+                                                                                    title="Amazing">5
+                                                                                    stars</label>
+                                                                            </fieldset>
+                                                                            <div class="mb-3">
+                                                                                <label class="form-label"
+                                                                                    for="body">Comment:
+                                                                                </label>
+                                                                                <textarea class="form-control"
+                                                                                    name="review[comment]" id="body"
+                                                                                    cols="30" rows="3"
+                                                                                    required></textarea>
+                                                                                <div class="valid-feedback">
+                                                                                    Looks good!
+                                                                                </div>
+                                                                                <div class="invalid-feedback">
+                                                                                    Write Something!
+                                                                                </div>
+                                                                            </div>
+                                                                            <button
+                                                                                class="btn float-right btn-success">Submit</button>
+                                                                        </form>
+                                                                        <% } %>
+                                                                            <% } %>
+                    </div>
+                    <div id="col2" class="col-md-5 mt-md-5 float-right">
 
-                <% if(currentUser) { %>
-                    <div class="row">
-                        <h1>Map</h1>
+                        <% if(currentUser) { %>
+                            <div class="row ml-3 pl-5">
+                                <div id='map' class="showMap" style='width: 90%; height: 400px;'></div>
+                            </div>
+                            <div class="row ml-4 pl-5 my-4">
+                                <p class="text-muted font-italic">Location:</p>
+                                <h5>
+                                    <%= diary.location %>
+                                </h5>
+                                <a class="btn btn-outline-primary mt-3"
+                                    href="https://maps.google.com/?q=<%= diary.location %>" target="_blank">Get
+                                    Directions</a>
+                            </div>
+                            <div class="row pl-0">
+                                <% if(diary.reviews.length>= 5 ) { %>
+                                    <h4>Leave a Comment</h4>
+                                    <form action="/diaries/<%= diary._id %>/reviews" method="POST"
+                                        class="mb-3 validated-form" novalidate>
+                                        <div class="mb-3">
+                                            <label class="form-label mt-3" for="rating">Rating</label>
+                                            <input class="form-range" type="range" min="1" max="5" name="review[rating]"
+                                                id="rating">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label" for="body">Comment</label>
+                                            <textarea class="form-control" name="review[comment]" id="body" cols="30"
+                                                rows="3" required></textarea>
+                                            <div class="valid-feedback">
+                                                Looks good!
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Write Something!
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-lg float-right btn-success">Submit</button>
+                                    </form>
+                                    <% } %>
+                            </div>
+                            <% } else { %>
+                                <% if(diary.reviews.length>0 ) { %>
+                                    <h4 class="d-flex align-items-center justify-content-center text-muted pt-5">LOGIN
+                                        to know
+                                        exact
+                                        location!
+                                    </h4>
+                                    <% } %>
+                                        <% } %>
                     </div>
-                    <div class="row">
-                        <% if(diary.reviews.length>= 5 ) { %>
-                            <h4>Leave a Comment</h4>
-                            <form action="/diaries/<%= diary._id %>/reviews" method="POST" class="mb-3 validated-form"
-                                novalidate>
-                                <div class="mb-3">
-                                    <label class="form-label mt-3" for="rating">Rating</label>
-                                    <input class="form-range" type="range" min="1" max="5" name="review[rating]"
-                                        id="rating">
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label" for="body">Comment</label>
-                                    <textarea class="form-control" name="review[comment]" id="body" cols="30" rows="3"
-                                        required></textarea>
-                                    <div class="valid-feedback">
-                                        Looks good!
-                                    </div>
-                                    <div class="invalid-feedback">
-                                        Write Something!
-                                    </div>
-                                </div>
-                                <button class="btn btn-lg float-right btn-success">Submit</button>
-                            </form>
-                            <% } %>
-                    </div>
-                    <% } else { %>
-                        <% if(diary.reviews.length>0 ) { %>
-                            <h4 class="d-flex align-items-center justify-content-center text-muted pt-5">LOGIN to know
-                                exact
-                                location!
-                            </h4>
-                            <% } %>
-                                <% } %>
-            </div>
-        </div>
+                </div>
     </div>
+
+    <script>
+        const mapToken="<%-process.env.MAPBOX_TOKEN%>";
+        const diary= <%- JSON.stringify(diary)%>
+    </script>
+    <script src="/javascript/showPageMap.js"></script>

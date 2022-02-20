@@ -1,17 +1,5 @@
-<style>
-    .navbar-brand {
-        font-size: 23px;
-        font-weight: bolder;
-    }
-
-    .navbar-brand span {
-        font-style: italic;
-        font-weight: lighter;
-    }
-</style>
-
 <div id="topheader">
-    <nav class="navbar navbar-expand-lg navbar-dark py-1" style="background-color: #013a63; font-size: 15px;">
+    <nav class="navbar navbar-expand-lg navbar-dark py-1">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">TRAVEL <span>diaries</span></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
@@ -49,10 +37,3 @@
         </div>
     </nav>
 </div>
-
-<script>
-    $( '#topheader .navbar-nav a' ).on( 'click', function () {
-        $( '#topheader .navbar-nav' ).find( 'li.active' ).removeClass( 'active' );
-        $( this ).parent( 'li' ).addClass( 'active' );
-    } );
-</script>
