@@ -126,7 +126,7 @@
 
 .card h5 {
   text-align: center;
-  font-size: 18px;
+  font-size: 1rem;
   font-weight: 500;
   font-family: "Bree Serif", serif;
   color: #222;
@@ -156,4 +156,30 @@
 
 .card:hover .card-body {
   background-color: #f8f8f8;
+}
+
+#indexMap h3 {
+  font-family: "Proza Libre", sans-serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.showMap {
+  width: 100%;
+  height: 500px;
+  border: 2px solid #013a63;
+}
+
+.mapboxgl-popup-close-button {
+  display: none;
+}
+
+.mapboxgl-popup-content h5 {
+  font-family: "Bree Serif", serif;
+  padding: 1px;
+}
+
+.mapboxgl-popup-content p {
+  font-family: "Bodoni Moda", serif;
 }

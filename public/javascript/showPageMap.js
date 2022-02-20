@@ -18,3 +18,6 @@ const map = new mapboxgl.Map({
 new mapboxgl.Marker({ color: "#e5383b" })
   .setLngLat(diary.geometry.coordinates)
   .addTo(map);
+
+map.scrollZoom.disable();
+map.addControl(new mapboxgl.NavigationControl());

@@ -46,7 +46,8 @@
                         <% if(count> 3) break %>
                             <% } %>
                                 <% if(recentDiaries.length> 3) { %>
-                                    <div class="more col d-flex justify-content-center align-items-center">
+                                    <div
+                                        class="more col d-flex justify-content-center align-items-center mt-sm-5 mt-lg-0">
                                         <a class="btn btn-lg btn-outline-danger" href="/diaries/recent">See More
                                             &#9112;</a>
                                     </div>
@@ -85,10 +86,24 @@
                         <% if(count> 3) break %>
                             <% } %>
                                 <% if(allDiaries.length> 3) { %>
-                                    <div class="more col d-flex justify-content-center align-items-center">
+                                    <div
+                                        class="more col d-flex justify-content-center align-items-center mt-sm-5 mt-lg-0">
                                         <a class="btn btn-lg btn-outline-danger" href="/diaries/alldiaries">See More
                                             &#9112;</a>
                                     </div>
                                     <% } %>
         </div>
+        <hr>
+        <div class="row my-5 pt-5">
+            <span id="indexMap" class="heading d-flex justify-content-center">
+                <h3>Destinations of our diaries...</h3>
+            </span>
+            <div id='map' class="showMap"></div>
+        </div>
     </div>
+
+    <script>
+        const mapToken="<%-process.env.MAPBOX_TOKEN%>";
+        const allDiaries= <%- JSON.stringify(allDiaries)%>
+    </script>
+    <script src="/javascript/showIndexMap.js"></script>
