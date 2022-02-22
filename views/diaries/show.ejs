@@ -49,15 +49,13 @@
                         <% if(currentUser && diary.author.equals(currentUser._id)) { %>
                             <hr>
                             <div>
-                                <a class="col-md-4 float-left btn btn-warning p-1 mx-1"
+                                <a class="col-md-4 float-left btn btn-warning p-2 mx-1"
                                     href="/diaries/<%= diary._id %>/edit">&#128221; Edit
                                     Diary</a>
                                 <p>
-                                <form action="/diaries/<%= diary._id %>?_method=DELETE" method="POST">
-                                    <button class="col-md-4 float-right btn btn-danger p-1 mx-1">Delete
-                                        Diary
-                                        &#9760;</button>
-                                </form>
+                                    <button class="col-md-4 float-right btn btn-danger p-2 mx-1" data-bs-toggle="modal"
+                                        data-bs-target="#deleteModal<%= diary._id %>">Delete
+                                        Diary &#10060;</button>
                                 </p>
                             </div>
                             <% } %>
@@ -226,6 +224,33 @@
                                         <% } %>
                     </div>
                 </div>
+    </div>
+
+    <!-- Delete Diary Modal -->
+    <div class="modal fade" id="deleteModal<%= diary._id %>" tabindex="-1" aria-labelledby="deleteModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel">Delete Diary</h4>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h5>Are you sure you want to delete the diary?</h5>
+                    <p class="text-muted">All the information and reviews will be permanently deleted! </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <form action="/diaries/<%= diary._id %>?_method=DELETE" method="POST">
+                        <button class="btn btn-danger">Delete
+                            Diary
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>

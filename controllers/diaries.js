@@ -8,7 +8,6 @@ const { cloudinary } = require("../cloudinary");
 module.exports.index = async (req, res) => {
   const recentDiaries = await Diary.find();
   const allDiaries = await Diary.find();
-
   recentDiaries.sort((a, b) => b.created - a.created);
   res.render("diaries/index", {
     recentDiaries,
