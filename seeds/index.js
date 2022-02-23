@@ -1,9 +1,15 @@
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+
 const mongoose = require("mongoose");
 const cities = require("./citiesGeo");
 const { places, descriptors } = require("./seedHelpers");
 const Diaries = require("../models/diary");
 
-mongoose.connect("mongodb://localhost:27017/travel-diaries", {
+const dbUrl = process.env.DB_URL;
+
+mongoose.connect(dbUrl, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -19,11 +25,11 @@ const test = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
 const seedDB = async () => {
   await Diaries.deleteMany({});
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 5; i++) {
     const random100 = Math.floor(Math.random() * 100);
     const cost = Math.floor(Math.random() * 90 + 10) * 100;
     const diary = new Diaries({
-      author: "620fb59388fdb726f0a4180e",
+      author: "62169176f94bf2e2e80c8631",
       title: `${test(descriptors)} ${test(places)}`,
       location: `${cities[random100].city}, ${cities[random100].state}`,
       geometry: {
