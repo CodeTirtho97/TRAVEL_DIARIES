@@ -1,4 +1,4 @@
-# Travel-Diaries
+# TRAVEL DIARIES
 
 #### -> A Full Stack Web Application developed using server-side scripting NodeJS (ExpressJS framework) following MVC architectural pattern and using MongoDB for performing CRUD operations.
 
