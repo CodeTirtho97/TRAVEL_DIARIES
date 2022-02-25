@@ -8,7 +8,7 @@
 
 ## Checkout the site:   https://thetraveldiaries.herokuapp.com/
 
-![image](https://user-images.githubusercontent.com/57649083/155788924-8eb20e1f-a3b8-4a7e-96f9-1f50d811ece7.png)
+![image](https://user-images.githubusercontent.com/57649083/155791670-8ffb880c-2f5e-40fd-854e-bba2411ef5c1.png)
 
 ![image](https://user-images.githubusercontent.com/57649083/155789359-5d87cc1b-c40d-49a6-bc96-95bb7a566937.png)
 
