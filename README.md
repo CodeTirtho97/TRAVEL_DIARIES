@@ -1,12 +1,12 @@
 # Travel-Diaries
 
-## A Full Stack Web Application developed using server-side scripting NodeJS (ExpressJS framework) following MVC architectural pattern and using MongoDB for performing CRUD operations.
+### A Full Stack Web Application developed using server-side scripting NodeJS (ExpressJS framework) following MVC architectural pattern and using MongoDB for performing CRUD operations.
 
-## Embedded Javascript (EJS) is used for web-page templating and Bootstrap 5 is used for styling and responsiveness for devices having different screen-sizes.
+### Embedded Javascript (EJS) is used for web-page templating and Bootstrap 5 is used for styling and responsiveness for devices having different screen-sizes.
 
-## Cloud-based image rendering and storage along with dynamically  geocoded location markers displayed in full width screen maps using MapBox API are also integrated for additional functionality and flexibility.
+### Cloud-based image rendering and storage along with dynamically  geocoded location markers displayed in full width screen maps using MapBox API are also integrated for additional functionality and flexibility.
 
-# Checkout the site:   https://thetraveldiaries.herokuapp.com/
+## Checkout the site:   https://thetraveldiaries.herokuapp.com/
 
 ![image](https://user-images.githubusercontent.com/57649083/155788924-8eb20e1f-a3b8-4a7e-96f9-1f50d811ece7.png)
 
